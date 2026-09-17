@@ -4,6 +4,9 @@ Aplikace načte týdenní rozvrh třídy 2.A z veřejného EduPage, umožní pov
 uživatelům vybrat jednu dělenou skupinu v každé hodině a zapsat společnou
 poznámku. Změny ukládá do SQLite a v 16:00 z nich může odeslat e-mailový souhrn.
 
+Postup pro ostré nasazení na školní Linux server pod doménou
+`asistent.arcig.cz` je v souboru [DEPLOYMENT_LINUX.md](DEPLOYMENT_LINUX.md).
+
 ## Spuštění
 
 Je potřeba Python 3.11 nebo novější. Aplikace nepoužívá žádné externí balíčky.
