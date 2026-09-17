@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Můj Rozvrh</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #0f172a; color: #f8fafc; margin: 0; padding: 20px; }
+    .container { max-width: 600px; margin: auto; }
+    header { margin-bottom: 24px; }
+    .card { background: #1e293b; padding: 16px; border-radius: 12px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; border-left: 4px solid #38bdf8; }
+    .card.active { border-left-color: #4ade80; background: #193836; transform: scale(1.02); transition: 0.3s; }
+    .period { font-size: 0.85rem; color: #94a3b8; }
+    .subject { font-size: 1.25rem; font-weight: bold; }
+    .details { text-align: right; font-size: 0.95rem; color: #cbd5e1; }
+    .meta { font-size: 0.75rem; color: #64748b; margin-top: 20px; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1 id="title">Rozvrh</h1>
+      <div id="status" class="period">Načítám...</div>
+    </header>
+
+    <div id="schedule"></div>
+    <div id="last-update" class="meta"></div>
+  </div>
+
+  <script>
+    async function loadSchedule() {
+      try {
+        // Přidán timestamp kvůli zamezení cachování v prohlížeči
+        const res = await fetch('timetable.json?t=' + Date.now());
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+
+        document.getElementById('title').innerText = `Rozvrh: ${data.class}`;
+        document.getElementById('last-update').innerText = `Naposledy aktualizováno: ${new Date(data.updated_at).toLocaleString('cs-CZ')}`;
+
+        const container = document.getElementById('schedule');
+        container.innerHTML = '';
+
+        const now = new Date();
+        const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+        data.lessons.forEach(l => {
+          const isActive = l.start && l.end && (currentTime >= l.start && currentTime <= l.end);
+          const el = document.createElement('div');
+          el.className = `card ${isActive ? 'active' : ''}`;
+          el.innerHTML = `
+            <div>
+              <div class="period">${l.period ? l.period + '. hodina' : ''} (${l.start || '?'} - ${l.end || '?'})</div>
+              <div class="subject">${l.subject || '—'}</div>
+            </div>
+            <div class="details">
+              <div><strong>${l.classroom || ''}</strong></div>
+              <div>${l.teacher || ''}</div>
+            </div>
+          `;
+          container.appendChild(el);
+        });
+
+        const lessonCount = data.lessons.length;
+        document.getElementById('status').innerText = lessonCount
+          ? `Rozvrh na ${new Date(`${data.date}T12:00:00`).toLocaleDateString('cs-CZ')}`
+          : 'Na dnešek nejsou žádné hodiny.';
+      } catch (err) {
+        console.error(err);
+        document.getElementById('status').innerText = 'Chyba při načítání rozvrhu.';
+      }
+    }
+
+    loadSchedule();
+  </script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+{
+  "updated_at": "2026-09-17T09:42:22.868050+00:00",
+  "date": "2026-09-17",
+  "class": "2.A",
+  "lessons": [
+    {
+      "date": "2026-09-17",
+      "period": "1",
+      "start": "08:15",
+      "end": "09:00",
+      "subject": "F",
+      "teacher": "Gr",
+      "classroom": "405",
+      "changed": false
+    },
+    {
+      "date": "2026-09-17",
+      "period": "2",
+      "start": "09:10",
+      "end": "09:55",
+      "subject": "AJ (AJ2)",
+      "teacher": "Va",
+      "classroom": "002",
+      "changed": true
+    },
+    {
+      "date": "2026-09-17",
+      "period": "2",
+      "start": "09:10",
+      "end": "09:55",
+      "subject": "NJ (AJ1)",
+      "teacher": "Sn",
+      "classroom": "105",
+      "changed": false
+    },
+    {
+      "date": "2026-09-17",
+      "period": "3",
+      "start": "10:15",
+      "end": "11:00",
+      "subject": "AJ (AJ1)",
+      "teacher": "Va",
+      "classroom": "002",
+      "changed": true
+    },
+    {
+      "date": "2026-09-17",
+      "period": "3",
+      "start": "10:15",
+      "end": "11:00",
+      "subject": "NJ (AJ2)",
+      "teacher": "Sn",
+      "classroom": "105",
+      "changed": false
+    },
+    {
+      "date": "2026-09-17",
+      "period": "4",
+      "start": "11:10",
+      "end": "11:55",
+      "subject": "BI",
+      "teacher": "Do",
+      "classroom": "411",
+      "changed": false
+    },
+    {
+      "date": "2026-09-17",
+      "period": "5",
+      "start": "12:05",
+      "end": "13:45",
+      "subject": "TV (Chl)",
+      "teacher": "Vo",
+      "classroom": "TV1",
+      "changed": false
+    },
+    {
+      "date": "2026-09-17",
+      "period": "5",
+      "start": "12:05",
+      "end": "13:45",
+      "subject": "TV (Dív)",
+      "teacher": "By",
+      "classroom": "TV2",
+      "changed": false
+    },
+    {
+      "date": "2026-09-17",
+      "period": "8",
+      "start": "14:40",
+      "end": "15:25",
+      "subject": "CJL",
+      "teacher": "Hb",
+      "classroom": "105",
+      "changed": false
+    },
+    {
+      "date": "2026-09-17",
+      "period": "9",
+      "start": "15:30",
+      "end": "16:15",
+      "subject": "TH",
+      "teacher": "Sn",
+      "classroom": "105",
+      "changed": false
+    }
+  ]
+}
