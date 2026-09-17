@@ -2,32 +2,40 @@ name: Aktualizovat rozvrh
 
 on:
   schedule:
-    # Běží v pondělí až pátek v 5:00 UTC (v ČR je to 6:00 nebo 7:00 ráno podle letního času)
-    - cron: '0 5 * * 1-5'
-  workflow_dispatch: # Umožní skript kdykoliv spustit i ručně kliknutím v GitHubu
+    # Pondeli az patek v 5:00 UTC (v Cesku 6:00 nebo 7:00 podle letniho casu).
+    - cron: "0 5 * * 1-5"
+  workflow_dispatch:
 
 permissions:
-  contents: write # DŮLEŽITÉ: dává botovi právo ukládat změny do repozitáře
+  contents: write
 
 jobs:
-  build:
+  update-timetable:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout kódu
+      - name: Checkout repozitare
         uses: actions/checkout@v4
 
-      - name: Nastavení Pythonu
+      - name: Nastaveni Pythonu
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
-      - name: Spuštění stahování
+      - name: Stazeni rozvrhu
         run: python fetch_timetable.py
 
-      - name: Uložení a commit timetable.json
+      - name: Ulozeni timetable.json
+        shell: bash
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add timetable.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto: aktualizace rozvrhu [skip ci]" && git push)
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add timetable.json timetable-data.js
+
+          if git diff --staged --quiet; then
+            echo "Rozvrh se nezmenil."
+            exit 0
+          fi
+
+          git commit -m "Auto: aktualizace rozvrhu [skip ci]"
+          git push

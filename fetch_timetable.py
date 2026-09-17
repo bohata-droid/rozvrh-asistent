@@ -164,9 +164,17 @@ def fetch_timetable(day=None):
         "class": TARGET_CLASS,
         "lessons": cards,
     }
+    json_text = json.dumps(output, ensure_ascii=False, indent=2)
     with open("timetable.json", "w", encoding="utf-8", newline="\n") as file:
-        json.dump(output, file, ensure_ascii=False, indent=2)
+        file.write(json_text)
         file.write("\n")
+
+    # A classic script can be loaded even when index.html is opened directly
+    # from disk, where browsers normally block fetch() of a sibling JSON file.
+    with open("timetable-data.js", "w", encoding="utf-8", newline="\n") as file:
+        file.write("window.TIMETABLE_DATA = ")
+        file.write(json_text.replace("</", "<\\/"))
+        file.write(";\n")
 
     print(f"Hotovo: {len(cards)} položek rozvrhu pro {TARGET_CLASS} na {date}.")
 

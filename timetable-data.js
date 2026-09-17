@@ -1,4 +1,4 @@
-{
+window.TIMETABLE_DATA = {
   "updated_at": "2026-09-17T09:56:24.923184+00:00",
   "date": "2026-09-17",
   "class": "2.A",
@@ -104,4 +104,4 @@
       "changed": false
     }
   ]
-}
+};

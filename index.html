@@ -27,13 +27,27 @@
     <div id="last-update" class="meta"></div>
   </div>
 
+  <script src="timetable-data.js"></script>
   <script>
     async function loadSchedule() {
       try {
-        // Přidán timestamp kvůli zamezení cachování v prohlížeči
-        const res = await fetch('timetable.json?t=' + Date.now());
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
+        let data = window.TIMETABLE_DATA;
+
+        // On a web server, prefer the newest JSON and bypass browser caching.
+        // The generated JS above remains a fallback for direct file opening.
+        if (location.protocol !== 'file:') {
+          try {
+            const res = await fetch(`timetable.json?t=${Date.now()}`, { cache: 'no-store' });
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            data = await res.json();
+          } catch (fetchError) {
+            console.warn('JSON se nepodařilo načíst, používám lokální data.', fetchError);
+          }
+        }
+
+        if (!data || !Array.isArray(data.lessons)) {
+          throw new Error('Data rozvrhu nejsou dostupná.');
+        }
 
         document.getElementById('title').innerText = `Rozvrh: ${data.class}`;
         document.getElementById('last-update').innerText = `Naposledy aktualizováno: ${new Date(data.updated_at).toLocaleString('cs-CZ')}`;
