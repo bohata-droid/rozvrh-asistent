@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: rozvrh-asistent
+    runtime: python
+    plan: 0.5c-512mb
+    buildCommand: python -m py_compile fetch_timetable.py server.py
+    startCommand: python server.py
+    healthCheckPath: /api/health
+    envVars:
+      - key: ASSISTANT_HOST
+        value: 0.0.0.0
+      - key: ASSISTANT_DB_PATH
+        value: /var/data/assistant.db
+      - key: ASSISTANT_ADMIN_PASSWORD
+        sync: false
+    disk:
+      name: assistant-data
+      mountPath: /var/data
+      sizeGB: 1

@@ -1,0 +1,6 @@
+__pycache__/
+*.py[cod]
+assistant.db
+assistant.db-shm
+assistant.db-wal
+.env
