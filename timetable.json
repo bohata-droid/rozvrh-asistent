@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-22T09:38:01.787759+00:00",
+  "updated_at": "2026-09-24T09:42:36.250934+00:00",
   "range_start": "2026-09-21",
   "range_end": "2026-09-25",
   "class": "2.A",
@@ -605,7 +605,7 @@
       "removed": false
     },
     {
-      "key": "14a085a57df87691",
+      "key": "dd847575804ab0d1",
       "date": "2026-09-24",
       "period": "1",
       "start": "08:15",
@@ -613,9 +613,9 @@
       "duration_periods": 1,
       "subject": "F",
       "groups": [],
-      "teacher": "Gr, DM",
+      "teacher": "Gr",
       "classroom": "405",
-      "changed": false,
+      "changed": true,
       "removed": false
     },
     {
@@ -697,7 +697,7 @@
       "removed": false
     },
     {
-      "key": "7780c02bad677909",
+      "key": "3966442b2f9dfcf7",
       "date": "2026-09-24",
       "period": "4",
       "start": "11:10",
@@ -705,9 +705,9 @@
       "duration_periods": 1,
       "subject": "BI",
       "groups": [],
-      "teacher": "Do, DM",
+      "teacher": "Do",
       "classroom": "411",
-      "changed": false,
+      "changed": true,
       "removed": false
     },
     {
@@ -743,7 +743,7 @@
       "removed": false
     },
     {
-      "key": "28586dd17994021d",
+      "key": "7b0391929e5be094",
       "date": "2026-09-24",
       "period": "8",
       "start": "14:40",
@@ -751,13 +751,13 @@
       "duration_periods": 1,
       "subject": "CJL",
       "groups": [],
-      "teacher": "Hb, DM",
+      "teacher": "Hb",
       "classroom": "105",
-      "changed": false,
+      "changed": true,
       "removed": false
     },
     {
-      "key": "185c02f07468a985",
+      "key": "b517c4bc087af594",
       "date": "2026-09-24",
       "period": "9",
       "start": "15:30",
@@ -765,13 +765,13 @@
       "duration_periods": 1,
       "subject": "TH",
       "groups": [],
-      "teacher": "Sn, DM",
+      "teacher": "Sn",
       "classroom": "105",
-      "changed": false,
+      "changed": true,
       "removed": false
     },
     {
-      "key": "f9dd71d5aa3c69cf",
+      "key": "00edb8eb9a587dd1",
       "date": "2026-09-25",
       "period": "1",
       "start": "08:15",
@@ -779,23 +779,9 @@
       "duration_periods": 1,
       "subject": "CH",
       "groups": [],
-      "teacher": "Gr, DM",
+      "teacher": "Gr",
       "classroom": "407",
-      "changed": false,
-      "removed": false
-    },
-    {
-      "key": "9f144e06a4a6df4e",
-      "date": "2026-09-25",
-      "period": "14-05",
-      "start": "14:05",
-      "end": "15:05",
-      "duration_periods": 1,
-      "subject": "Kroužek",
-      "groups": [],
-      "teacher": "Wt, Ondřej Plíva",
-      "classroom": "108",
-      "changed": false,
+      "changed": true,
       "removed": false
     },
     {
@@ -827,7 +813,7 @@
       "removed": false
     },
     {
-      "key": "fc93b7e12d76dfc4",
+      "key": "f17638f1d7e0e7b3",
       "date": "2026-09-25",
       "period": "2",
       "start": "09:10",
@@ -835,13 +821,13 @@
       "duration_periods": 1,
       "subject": "M",
       "groups": [],
-      "teacher": "Ša, DM",
+      "teacher": "Ša",
       "classroom": "105",
-      "changed": false,
+      "changed": true,
       "removed": false
     },
     {
-      "key": "74c8774852d728fa",
+      "key": "9968440356039d8e",
       "date": "2026-09-25",
       "period": "3",
       "start": "10:15",
@@ -849,13 +835,13 @@
       "duration_periods": 1,
       "subject": "F",
       "groups": [],
-      "teacher": "Gr, DM",
+      "teacher": "Gr",
       "classroom": "405",
-      "changed": false,
+      "changed": true,
       "removed": false
     },
     {
-      "key": "160e795bc0895ef0",
+      "key": "c155ae185cc8c86a",
       "date": "2026-09-25",
       "period": "4",
       "start": "11:10",
@@ -863,13 +849,13 @@
       "duration_periods": 1,
       "subject": "Z",
       "groups": [],
-      "teacher": "Tr, DM",
+      "teacher": "Tr",
       "classroom": "105",
-      "changed": false,
+      "changed": true,
       "removed": false
     },
     {
-      "key": "8b2fd68257107d0e",
+      "key": "3ff7cf3e2d20cd85",
       "date": "2026-09-25",
       "period": "5",
       "start": "12:05",
@@ -877,13 +863,13 @@
       "duration_periods": 1,
       "subject": "BI",
       "groups": [],
-      "teacher": "Do, DM",
+      "teacher": "Do",
       "classroom": "411",
-      "changed": false,
+      "changed": true,
       "removed": false
     },
     {
-      "key": "716f386fed571280",
+      "key": "a11f9db8400dccbf",
       "date": "2026-09-25",
       "period": "6",
       "start": "13:00",
@@ -891,9 +877,9 @@
       "duration_periods": 1,
       "subject": "CJL",
       "groups": [],
-      "teacher": "Hb, DM",
+      "teacher": "Hb",
       "classroom": "105",
-      "changed": false,
+      "changed": true,
       "removed": false
     }
   ]
