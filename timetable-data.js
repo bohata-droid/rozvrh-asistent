@@ -1,7 +1,7 @@
 window.TIMETABLE_DATA = {
-  "updated_at": "2026-09-24T09:42:36.250934+00:00",
-  "range_start": "2026-09-21",
-  "range_end": "2026-09-25",
+  "updated_at": "2026-09-29T11:06:40.594416+00:00",
+  "range_start": "2026-09-28",
+  "range_end": "2026-10-02",
   "class": "2.A",
   "periods": [
     {
@@ -57,71 +57,11 @@ window.TIMETABLE_DATA = {
   ],
   "lessons": [
     {
-      "key": "413958fc47b52a77",
-      "date": "2026-09-21",
+      "key": "99c5291332d04ea1",
+      "date": "2026-09-29",
       "period": "1",
       "start": "08:15",
       "end": "09:00",
-      "duration_periods": 1,
-      "subject": "INF",
-      "groups": [
-        "AJ2"
-      ],
-      "teacher": "Šk",
-      "classroom": "010",
-      "changed": false,
-      "removed": false
-    },
-    {
-      "key": "80ec84963d338955",
-      "date": "2026-09-21",
-      "period": "1",
-      "start": "08:15",
-      "end": "09:00",
-      "duration_periods": 1,
-      "subject": "KNJ",
-      "groups": [
-        "AJ1"
-      ],
-      "teacher": "Da",
-      "classroom": "105",
-      "changed": false,
-      "removed": false
-    },
-    {
-      "key": "d8035292158b348d",
-      "date": "2026-09-21",
-      "period": "14-00",
-      "start": "14:00",
-      "end": "15:00",
-      "duration_periods": 1,
-      "subject": "Kroužek",
-      "groups": [],
-      "teacher": "-HS-",
-      "classroom": "503",
-      "changed": false,
-      "removed": false
-    },
-    {
-      "key": "e4659d8703290b79",
-      "date": "2026-09-21",
-      "period": "14-00",
-      "start": "14:00",
-      "end": "16:00",
-      "duration_periods": 1,
-      "subject": "Kroužek",
-      "groups": [],
-      "teacher": "Pt",
-      "classroom": "409",
-      "changed": false,
-      "removed": false
-    },
-    {
-      "key": "a2b712aeecc68ea8",
-      "date": "2026-09-21",
-      "period": "2",
-      "start": "09:10",
-      "end": "09:55",
       "duration_periods": 1,
       "subject": "M",
       "groups": [],
@@ -131,146 +71,22 @@ window.TIMETABLE_DATA = {
       "removed": false
     },
     {
-      "key": "46b723caa0a26711",
-      "date": "2026-09-21",
-      "period": "3",
-      "start": "10:15",
-      "end": "11:00",
-      "duration_periods": 1,
-      "subject": "AJ",
-      "groups": [
-        "AJ1"
-      ],
-      "teacher": "Ha",
-      "classroom": "002",
-      "changed": false,
-      "removed": false
-    },
-    {
-      "key": "fa1f87d396e26394",
-      "date": "2026-09-21",
-      "period": "3",
-      "start": "10:15",
-      "end": "11:00",
-      "duration_periods": 1,
-      "subject": "CJL",
-      "groups": [
-        "AJ2"
-      ],
-      "teacher": "Hb",
-      "classroom": "105",
-      "changed": false,
-      "removed": false
-    },
-    {
-      "key": "53f0a5dcc9d3a60b",
-      "date": "2026-09-21",
-      "period": "4",
-      "start": "11:10",
-      "end": "11:55",
-      "duration_periods": 1,
-      "subject": "AJ",
-      "groups": [
-        "AJ2"
-      ],
-      "teacher": "Ha",
-      "classroom": "002",
-      "changed": false,
-      "removed": false
-    },
-    {
-      "key": "67555eb372132c91",
-      "date": "2026-09-21",
-      "period": "4",
-      "start": "11:10",
-      "end": "11:55",
-      "duration_periods": 1,
-      "subject": "CJL",
-      "groups": [
-        "AJ1"
-      ],
-      "teacher": "Hb",
-      "classroom": "105",
-      "changed": false,
-      "removed": false
-    },
-    {
-      "key": "fd5521af28a82416",
-      "date": "2026-09-21",
-      "period": "5",
-      "start": "12:05",
-      "end": "12:50",
-      "duration_periods": 1,
-      "subject": "INF",
-      "groups": [
-        "AJ1"
-      ],
-      "teacher": "Šk",
-      "classroom": "512",
-      "changed": false,
-      "removed": false
-    },
-    {
-      "key": "c592d2d5f3511036",
-      "date": "2026-09-21",
-      "period": "5",
-      "start": "12:05",
-      "end": "12:50",
-      "duration_periods": 1,
-      "subject": "KNJ",
-      "groups": [
-        "AJ2"
-      ],
-      "teacher": "Da",
-      "classroom": "504",
-      "changed": false,
-      "removed": false
-    },
-    {
-      "key": "79b111a5145568b4",
-      "date": "2026-09-21",
-      "period": "6",
-      "start": "13:00",
-      "end": "13:45",
-      "duration_periods": 1,
-      "subject": "D",
-      "groups": [],
-      "teacher": "Fk",
-      "classroom": "105",
-      "changed": true,
-      "removed": false
-    },
-    {
-      "key": "f2996626a77ddd76",
-      "date": "2026-09-22",
-      "period": "1",
-      "start": "08:15",
-      "end": "09:00",
-      "duration_periods": 1,
-      "subject": "M",
-      "groups": [],
-      "teacher": "Ša, DM",
-      "classroom": "105",
-      "changed": false,
-      "removed": false
-    },
-    {
-      "key": "e494aec9168da738",
-      "date": "2026-09-22",
+      "key": "db54d6b62a17e9f1",
+      "date": "2026-09-29",
       "period": "2",
       "start": "09:10",
       "end": "09:55",
       "duration_periods": 1,
       "subject": "CH",
       "groups": [],
-      "teacher": "Gr, DM",
+      "teacher": "Gr",
       "classroom": "405",
-      "changed": false,
+      "changed": true,
       "removed": false
     },
     {
-      "key": "35af7f28a7438562",
-      "date": "2026-09-22",
+      "key": "f86a1a421f1d6cd2",
+      "date": "2026-09-29",
       "period": "3",
       "start": "10:15",
       "end": "11:00",
@@ -280,39 +96,71 @@ window.TIMETABLE_DATA = {
       "teacher": "Hb, DM",
       "classroom": "105",
       "changed": false,
+      "removed": true
+    },
+    {
+      "key": "ad0fe8fb252eba0f",
+      "date": "2026-09-29",
+      "period": "3",
+      "start": "10:15",
+      "end": "11:00",
+      "duration_periods": 1,
+      "subject": "KAJ",
+      "groups": [
+        "AJ1"
+      ],
+      "teacher": "Ha",
+      "classroom": "002",
+      "changed": true,
       "removed": false
     },
     {
-      "key": "7638917f0396ba69",
-      "date": "2026-09-22",
+      "key": "54c7293c2a0cad41",
+      "date": "2026-09-29",
+      "period": "3",
+      "start": "10:15",
+      "end": "11:00",
+      "duration_periods": 1,
+      "subject": "NJ",
+      "groups": [
+        "AJ2"
+      ],
+      "teacher": "Gz",
+      "classroom": "105",
+      "changed": true,
+      "removed": false
+    },
+    {
+      "key": "47cc4a95fb68012e",
+      "date": "2026-09-29",
       "period": "4",
       "start": "11:10",
       "end": "11:55",
       "duration_periods": 1,
       "subject": "D",
       "groups": [],
-      "teacher": "Fk, DM",
+      "teacher": "Fk",
       "classroom": "105",
-      "changed": false,
+      "changed": true,
       "removed": false
     },
     {
-      "key": "5cfc7121356c5ea1",
-      "date": "2026-09-22",
+      "key": "f31ec3a923b467b4",
+      "date": "2026-09-29",
       "period": "6",
       "start": "13:00",
       "end": "13:45",
       "duration_periods": 1,
       "subject": "Z",
       "groups": [],
-      "teacher": "Tr, DM",
+      "teacher": "Tr",
       "classroom": "105",
-      "changed": false,
+      "changed": true,
       "removed": false
     },
     {
-      "key": "5601c61415a85969",
-      "date": "2026-09-22",
+      "key": "fb284da74a39f9bd",
+      "date": "2026-09-29",
       "period": "7",
       "start": "13:50",
       "end": "14:35",
@@ -327,8 +175,8 @@ window.TIMETABLE_DATA = {
       "removed": false
     },
     {
-      "key": "bf4cd793ee5f2d11",
-      "date": "2026-09-22",
+      "key": "a434ef4ef6e1f44c",
+      "date": "2026-09-29",
       "period": "7",
       "start": "13:50",
       "end": "14:35",
@@ -340,11 +188,11 @@ window.TIMETABLE_DATA = {
       "teacher": "Sn",
       "classroom": "105",
       "changed": false,
-      "removed": false
+      "removed": true
     },
     {
-      "key": "1bd7636e4e0a09ed",
-      "date": "2026-09-22",
+      "key": "19e8ff95d57574a9",
+      "date": "2026-09-29",
       "period": "8",
       "start": "14:40",
       "end": "15:25",
@@ -356,11 +204,11 @@ window.TIMETABLE_DATA = {
       "teacher": "Ha",
       "classroom": "002",
       "changed": false,
-      "removed": false
+      "removed": true
     },
     {
-      "key": "493301c8cd80a8ee",
-      "date": "2026-09-22",
+      "key": "8419bfc07a611f5b",
+      "date": "2026-09-29",
       "period": "8",
       "start": "14:40",
       "end": "15:25",
@@ -372,11 +220,11 @@ window.TIMETABLE_DATA = {
       "teacher": "Sn",
       "classroom": "105",
       "changed": false,
-      "removed": false
+      "removed": true
     },
     {
-      "key": "bfa0566d7948d199",
-      "date": "2026-09-23",
+      "key": "4bacfb982261d675",
+      "date": "2026-09-30",
       "period": "1",
       "start": "08:15",
       "end": "09:00",
@@ -391,8 +239,8 @@ window.TIMETABLE_DATA = {
       "removed": false
     },
     {
-      "key": "7dfe67cea802451e",
-      "date": "2026-09-23",
+      "key": "f59169db27b47c7e",
+      "date": "2026-09-30",
       "period": "1",
       "start": "08:15",
       "end": "09:00",
@@ -407,8 +255,22 @@ window.TIMETABLE_DATA = {
       "removed": false
     },
     {
-      "key": "213fde19553af9be",
-      "date": "2026-09-23",
+      "key": "e5d9ab51b4dfc972",
+      "date": "2026-09-30",
+      "period": "14-00",
+      "start": "14:00",
+      "end": "15:00",
+      "duration_periods": 1,
+      "subject": "Kroužek",
+      "groups": [],
+      "teacher": "AHK",
+      "classroom": "207",
+      "changed": false,
+      "removed": false
+    },
+    {
+      "key": "0c6b145cab41f6aa",
+      "date": "2026-09-30",
       "period": "14-15",
       "start": "14:15",
       "end": "15:15",
@@ -421,8 +283,8 @@ window.TIMETABLE_DATA = {
       "removed": false
     },
     {
-      "key": "e5a315278047491d",
-      "date": "2026-09-23",
+      "key": "ea8f05d484f2d9da",
+      "date": "2026-09-30",
       "period": "14-15",
       "start": "14:15",
       "end": "15:45",
@@ -435,8 +297,8 @@ window.TIMETABLE_DATA = {
       "removed": false
     },
     {
-      "key": "b316fe3d43c5dd26",
-      "date": "2026-09-23",
+      "key": "e543bcdcc99b2b83",
+      "date": "2026-09-30",
       "period": "14-20",
       "start": "14:20",
       "end": "15:50",
@@ -449,8 +311,8 @@ window.TIMETABLE_DATA = {
       "removed": false
     },
     {
-      "key": "669aef4ef3ec322a",
-      "date": "2026-09-23",
+      "key": "cbbf3b9a956d95b6",
+      "date": "2026-09-30",
       "period": "14-30",
       "start": "14:30",
       "end": "16:00",
@@ -463,11 +325,11 @@ window.TIMETABLE_DATA = {
       "removed": false
     },
     {
-      "key": "87c544b001e5e1e0",
-      "date": "2026-09-23",
-      "period": "15-00",
-      "start": "15:00",
-      "end": "16:30",
+      "key": "ada3af31833fdf29",
+      "date": "2026-09-30",
+      "period": "15-15",
+      "start": "15:15",
+      "end": "16:15",
       "duration_periods": 1,
       "subject": "Kroužek",
       "groups": [],
@@ -477,8 +339,8 @@ window.TIMETABLE_DATA = {
       "removed": false
     },
     {
-      "key": "0bd38fd430bd3f6f",
-      "date": "2026-09-23",
+      "key": "127275f9e4a72579",
+      "date": "2026-09-30",
       "period": "2",
       "start": "09:10",
       "end": "09:55",
@@ -493,8 +355,8 @@ window.TIMETABLE_DATA = {
       "removed": false
     },
     {
-      "key": "25f553cb50e0a1e1",
-      "date": "2026-09-23",
+      "key": "0f20e4845ec11e12",
+      "date": "2026-09-30",
       "period": "2",
       "start": "09:10",
       "end": "09:55",
@@ -509,8 +371,8 @@ window.TIMETABLE_DATA = {
       "removed": false
     },
     {
-      "key": "fd7c51309039156e",
-      "date": "2026-09-23",
+      "key": "e178879925ab8781",
+      "date": "2026-09-30",
       "period": "3",
       "start": "10:15",
       "end": "11:00",
@@ -525,8 +387,8 @@ window.TIMETABLE_DATA = {
       "removed": false
     },
     {
-      "key": "8f6ca20a7b34077a",
-      "date": "2026-09-23",
+      "key": "bbae3a3ab12581d2",
+      "date": "2026-09-30",
       "period": "3",
       "start": "10:15",
       "end": "11:00",
@@ -538,11 +400,41 @@ window.TIMETABLE_DATA = {
       "teacher": "Sn",
       "classroom": "105",
       "changed": false,
+      "removed": true
+    },
+    {
+      "key": "5ccd7d1bf9e1b567",
+      "date": "2026-09-30",
+      "period": "3",
+      "start": "10:15",
+      "end": "11:00",
+      "duration_periods": 1,
+      "subject": "NN",
+      "groups": [
+        "AJ2"
+      ],
+      "teacher": "Šr",
+      "classroom": "105",
+      "changed": true,
       "removed": false
     },
     {
-      "key": "e64e986993661187",
-      "date": "2026-09-23",
+      "key": "d3c7495a1a718f16",
+      "date": "2026-09-30",
+      "period": "4",
+      "start": "11:10",
+      "end": "11:55",
+      "duration_periods": 1,
+      "subject": "BI",
+      "groups": [],
+      "teacher": "Do",
+      "classroom": "311",
+      "changed": true,
+      "removed": false
+    },
+    {
+      "key": "9176a50b2aff7649",
+      "date": "2026-09-30",
       "period": "4",
       "start": "11:10",
       "end": "11:55",
@@ -554,11 +446,11 @@ window.TIMETABLE_DATA = {
       "teacher": "Sn",
       "classroom": "105",
       "changed": false,
-      "removed": false
+      "removed": true
     },
     {
-      "key": "93c6899711b68095",
-      "date": "2026-09-23",
+      "key": "3f4b24800b33f101",
+      "date": "2026-09-30",
       "period": "4",
       "start": "11:10",
       "end": "11:55",
@@ -570,18 +462,18 @@ window.TIMETABLE_DATA = {
       "teacher": "Šr",
       "classroom": "101",
       "changed": false,
-      "removed": false
+      "removed": true
     },
     {
-      "key": "a20200f1286479d7",
-      "date": "2026-09-23",
+      "key": "ed9390765ff6fc4e",
+      "date": "2026-09-30",
       "period": "5",
       "start": "12:05",
       "end": "13:45",
       "duration_periods": 2,
       "subject": "HV",
       "groups": [
-        "AJ2"
+        "AJ1"
       ],
       "teacher": "Wt",
       "classroom": "108",
@@ -589,15 +481,15 @@ window.TIMETABLE_DATA = {
       "removed": false
     },
     {
-      "key": "d746be7657602791",
-      "date": "2026-09-23",
+      "key": "0d5da4463dc66528",
+      "date": "2026-09-30",
       "period": "5",
       "start": "12:05",
       "end": "13:45",
       "duration_periods": 2,
       "subject": "VV",
       "groups": [
-        "AJ1"
+        "AJ2"
       ],
       "teacher": "An",
       "classroom": "409",
@@ -605,22 +497,22 @@ window.TIMETABLE_DATA = {
       "removed": false
     },
     {
-      "key": "dd847575804ab0d1",
-      "date": "2026-09-24",
+      "key": "f4944ef10d0d9be1",
+      "date": "2026-10-01",
       "period": "1",
       "start": "08:15",
       "end": "09:00",
       "duration_periods": 1,
       "subject": "F",
       "groups": [],
-      "teacher": "Gr",
+      "teacher": "Gr, DM",
       "classroom": "405",
-      "changed": true,
+      "changed": false,
       "removed": false
     },
     {
-      "key": "6baf346e4edae0f7",
-      "date": "2026-09-24",
+      "key": "2d0c4d560ff65a33",
+      "date": "2026-10-01",
       "period": "15-00",
       "start": "15:00",
       "end": "16:00",
@@ -633,8 +525,8 @@ window.TIMETABLE_DATA = {
       "removed": false
     },
     {
-      "key": "16d05e29e0d70e4b",
-      "date": "2026-09-24",
+      "key": "23611b699a706a67",
+      "date": "2026-10-01",
       "period": "2",
       "start": "09:10",
       "end": "09:55",
@@ -649,8 +541,8 @@ window.TIMETABLE_DATA = {
       "removed": false
     },
     {
-      "key": "a872265e3bc11ff7",
-      "date": "2026-09-24",
+      "key": "56960bf5714056b4",
+      "date": "2026-10-01",
       "period": "2",
       "start": "09:10",
       "end": "09:55",
@@ -665,8 +557,8 @@ window.TIMETABLE_DATA = {
       "removed": false
     },
     {
-      "key": "08b260ee0f213a26",
-      "date": "2026-09-24",
+      "key": "dbafa2a50079b50a",
+      "date": "2026-10-01",
       "period": "3",
       "start": "10:15",
       "end": "11:00",
@@ -681,8 +573,8 @@ window.TIMETABLE_DATA = {
       "removed": false
     },
     {
-      "key": "3ea192df3f80d583",
-      "date": "2026-09-24",
+      "key": "f541d1cb4ef02681",
+      "date": "2026-10-01",
       "period": "3",
       "start": "10:15",
       "end": "11:00",
@@ -697,38 +589,22 @@ window.TIMETABLE_DATA = {
       "removed": false
     },
     {
-      "key": "3966442b2f9dfcf7",
-      "date": "2026-09-24",
+      "key": "20d7d152b141cb23",
+      "date": "2026-10-01",
       "period": "4",
       "start": "11:10",
       "end": "11:55",
       "duration_periods": 1,
       "subject": "BI",
       "groups": [],
-      "teacher": "Do",
+      "teacher": "Do, DM",
       "classroom": "411",
-      "changed": true,
+      "changed": false,
       "removed": false
     },
     {
-      "key": "a6cc52f4dc122e96",
-      "date": "2026-09-24",
-      "period": "5",
-      "start": "12:05",
-      "end": "13:45",
-      "duration_periods": 2,
-      "subject": "TV",
-      "groups": [
-        "Dív"
-      ],
-      "teacher": "Vo",
-      "classroom": "TV2",
-      "changed": true,
-      "removed": false
-    },
-    {
-      "key": "bfc89d3635c137cf",
-      "date": "2026-09-24",
+      "key": "23c6e2b6f6b36177",
+      "date": "2026-10-01",
       "period": "5",
       "start": "12:05",
       "end": "13:45",
@@ -743,50 +619,80 @@ window.TIMETABLE_DATA = {
       "removed": false
     },
     {
-      "key": "7b0391929e5be094",
-      "date": "2026-09-24",
+      "key": "93046595d6e652f4",
+      "date": "2026-10-01",
+      "period": "5",
+      "start": "12:05",
+      "end": "13:45",
+      "duration_periods": 2,
+      "subject": "TV",
+      "groups": [
+        "Dív"
+      ],
+      "teacher": "By",
+      "classroom": "TV2",
+      "changed": false,
+      "removed": false
+    },
+    {
+      "key": "1d8a5086f3c7b63b",
+      "date": "2026-10-01",
       "period": "8",
       "start": "14:40",
       "end": "15:25",
       "duration_periods": 1,
       "subject": "CJL",
       "groups": [],
-      "teacher": "Hb",
+      "teacher": "Hb, DM",
       "classroom": "105",
-      "changed": true,
+      "changed": false,
       "removed": false
     },
     {
-      "key": "b517c4bc087af594",
-      "date": "2026-09-24",
+      "key": "f3182d65a81f6d2a",
+      "date": "2026-10-01",
       "period": "9",
       "start": "15:30",
       "end": "16:15",
       "duration_periods": 1,
       "subject": "TH",
       "groups": [],
-      "teacher": "Sn",
+      "teacher": "Sn, DM",
       "classroom": "105",
-      "changed": true,
+      "changed": false,
       "removed": false
     },
     {
-      "key": "00edb8eb9a587dd1",
-      "date": "2026-09-25",
+      "key": "6886604ed34d9166",
+      "date": "2026-10-02",
       "period": "1",
       "start": "08:15",
       "end": "09:00",
       "duration_periods": 1,
       "subject": "CH",
       "groups": [],
-      "teacher": "Gr",
+      "teacher": "Gr, DM",
       "classroom": "407",
-      "changed": true,
+      "changed": false,
       "removed": false
     },
     {
-      "key": "8e022e8dfa141af1",
-      "date": "2026-09-25",
+      "key": "3b8429e9630b1a68",
+      "date": "2026-10-02",
+      "period": "14-00",
+      "start": "14:00",
+      "end": "15:00",
+      "duration_periods": 1,
+      "subject": "Kroužek",
+      "groups": [],
+      "teacher": "AHK",
+      "classroom": "207",
+      "changed": false,
+      "removed": false
+    },
+    {
+      "key": "f095b22cd5ec45bc",
+      "date": "2026-10-02",
       "period": "14-15",
       "start": "14:15",
       "end": "15:45",
@@ -799,8 +705,8 @@ window.TIMETABLE_DATA = {
       "removed": false
     },
     {
-      "key": "fb74385762fc42cb",
-      "date": "2026-09-25",
+      "key": "511686c4c0b960c5",
+      "date": "2026-10-02",
       "period": "14-30",
       "start": "14:30",
       "end": "15:30",
@@ -813,73 +719,73 @@ window.TIMETABLE_DATA = {
       "removed": false
     },
     {
-      "key": "f17638f1d7e0e7b3",
-      "date": "2026-09-25",
+      "key": "debeec06aa72990e",
+      "date": "2026-10-02",
       "period": "2",
       "start": "09:10",
       "end": "09:55",
       "duration_periods": 1,
       "subject": "M",
       "groups": [],
-      "teacher": "Ša",
+      "teacher": "Ša, DM",
       "classroom": "105",
-      "changed": true,
+      "changed": false,
       "removed": false
     },
     {
-      "key": "9968440356039d8e",
-      "date": "2026-09-25",
+      "key": "3e11d2e4ee4a0c02",
+      "date": "2026-10-02",
       "period": "3",
       "start": "10:15",
       "end": "11:00",
       "duration_periods": 1,
       "subject": "F",
       "groups": [],
-      "teacher": "Gr",
+      "teacher": "Gr, DM",
       "classroom": "405",
-      "changed": true,
+      "changed": false,
       "removed": false
     },
     {
-      "key": "c155ae185cc8c86a",
-      "date": "2026-09-25",
+      "key": "1509dbf4a1da1527",
+      "date": "2026-10-02",
       "period": "4",
       "start": "11:10",
       "end": "11:55",
       "duration_periods": 1,
       "subject": "Z",
       "groups": [],
-      "teacher": "Tr",
+      "teacher": "Tr, DM",
       "classroom": "105",
-      "changed": true,
+      "changed": false,
       "removed": false
     },
     {
-      "key": "3ff7cf3e2d20cd85",
-      "date": "2026-09-25",
+      "key": "67c9fed07e89fd7c",
+      "date": "2026-10-02",
       "period": "5",
       "start": "12:05",
       "end": "12:50",
       "duration_periods": 1,
       "subject": "BI",
       "groups": [],
-      "teacher": "Do",
+      "teacher": "Do, DM",
       "classroom": "411",
-      "changed": true,
+      "changed": false,
       "removed": false
     },
     {
-      "key": "a11f9db8400dccbf",
-      "date": "2026-09-25",
+      "key": "500d52faa5a789d1",
+      "date": "2026-10-02",
       "period": "6",
       "start": "13:00",
       "end": "13:45",
       "duration_periods": 1,
       "subject": "CJL",
       "groups": [],
-      "teacher": "Hb",
+      "teacher": "Hb, DM",
       "classroom": "105",
-      "changed": true,
+      "changed": false,
       "removed": false
     }
   ]
