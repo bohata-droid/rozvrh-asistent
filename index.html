@@ -263,6 +263,8 @@
     const knownStaticHost = location.protocol === 'file:' || location.hostname.endsWith('.github.io');
     const state = { status: null, week: null, weekStart: monday(new Date()), adminPassword: '', serverAvailable: knownStaticHost ? false : null };
     const dayNames = ['Po', 'Út', 'St', 'Čt', 'Pá'];
+    const syncIntervalMs = 15_000;
+    let syncInProgress = false;
 
     function monday(date) {
       const value = new Date(date.getFullYear(), date.getMonth(), date.getDate());
@@ -289,7 +291,7 @@
     }
     async function api(path, options = {}) {
       const headers = { ...(options.body ? {'Content-Type': 'application/json'} : {}), ...(options.headers || {}) };
-      const response = await fetch(path, { ...options, headers });
+      const response = await fetch(path, { cache: 'no-store', ...options, headers });
       let data;
       try { data = await response.json(); } catch { data = {}; }
       if (!response.ok) throw new Error(data.error || `Chyba HTTP ${response.status}`);
@@ -379,6 +381,37 @@
         if (state.week.cache_warning) toast(state.week.cache_warning, true);
       } catch (error) {
         document.getElementById('tableArea').innerHTML = `<div class="loading error">${escapeHtml(error.message)}</div>`;
+      }
+    }
+
+    async function syncSharedState() {
+      if (knownStaticHost || document.hidden || syncInProgress) return;
+      syncInProgress = true;
+      const requestedStart = iso(state.weekStart);
+      try {
+        const [status, week] = await Promise.all([
+          api('/api/status'),
+          api(`/api/week?start=${requestedStart}`)
+        ]);
+        const statusChanged = JSON.stringify(state.status) !== JSON.stringify(status);
+        const weekChanged = JSON.stringify(state.week) !== JSON.stringify(week);
+        state.serverAvailable = true;
+        state.status = status;
+        if (statusChanged) {
+          renderAccount();
+          // Během rozepsané poznámky nesmí synchronizace zahodit text uživatele.
+          if (!document.getElementById('noteInput')) renderNote();
+        }
+        // Uživatel mohl během požadavku přepnout týden.
+        if (iso(state.weekStart) === requestedStart) {
+          state.week = week;
+          if (weekChanged) renderWeek();
+        }
+      } catch (error) {
+        // Krátký výpadek nesmí přepnout aplikaci natrvalo do statického režimu.
+        console.warn('Automatická synchronizace se nezdařila.', error);
+      } finally {
+        syncInProgress = false;
       }
     }
 
@@ -631,7 +664,15 @@
     };
     document.querySelectorAll('.close-dialog').forEach(button => button.onclick = () => button.closest('dialog').close());
 
-    Promise.all([loadStatus(), loadWeek()]).catch(error => toast(error.message, true));
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) syncSharedState();
+    });
+    window.addEventListener('focus', syncSharedState);
+    setInterval(syncSharedState, syncIntervalMs);
+
+    Promise.all([loadStatus(), loadWeek()])
+      .then(() => syncSharedState())
+      .catch(error => toast(error.message, true));
   </script>
 </body>
 </html>

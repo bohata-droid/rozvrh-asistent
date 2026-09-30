@@ -88,8 +88,18 @@ def datetime_cz(value: dt.datetime) -> str:
     return f"{value.day}. {value.month}. {value.year} {value:%H:%M}"
 
 
+class ClosingConnection(sqlite3.Connection):
+    """Po dokončení transakce spojení také zavře, nejen commitne."""
+
+    def __exit__(self, exc_type, exc_value, traceback) -> bool:
+        try:
+            return super().__exit__(exc_type, exc_value, traceback)
+        finally:
+            self.close()
+
+
 def db_connect() -> sqlite3.Connection:
-    connection = sqlite3.connect(DB_PATH, timeout=10)
+    connection = sqlite3.connect(DB_PATH, timeout=10, factory=ClosingConnection)
     connection.row_factory = sqlite3.Row
     connection.execute("PRAGMA foreign_keys = ON")
     return connection
