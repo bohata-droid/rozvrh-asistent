@@ -1,8 +1,9 @@
 # Asistent pedagoga – týdenní rozvrh
 
-Aplikace načte týdenní rozvrh třídy 2.A z veřejného EduPage, umožní pověřeným
-uživatelům vybrat jednu dělenou skupinu v každé hodině a zapsat společnou
-poznámku. Změny ukládá do SQLite a v 16:00 z nich může odeslat e-mailový souhrn.
+Aplikace načte týdenní rozvrh třídy 2.A z veřejného EduPage. Asistent zapisuje
+svou přítomnost a poznámku, učitel může označit nepřítomnost asistenta a napsat
+mu zprávu. Změny ukládá do SQLite a v 16:00 z nich odesílá přihlášeným
+příjemcům přehledný e-mailový souhrn.
 
 Postup pro ostré nasazení na školní Linux server pod doménou
 `asistent.arcig.cz` je v souboru [DEPLOYMENT_LINUX.md](DEPLOYMENT_LINUX.md).
@@ -19,6 +20,16 @@ python server.py
 Potom otevřete `http://127.0.0.1:8000`. Při prvním spuštění otevřete ozubené
 kolečko, zadejte heslo správce a přidejte uživatele. Pokud proměnnou s heslem
 nenastavíte, dočasné výchozí heslo je `zmenit-me`.
+
+Správce přiděluje každému uživateli roli **asistent** nebo **učitel**. Přihlášený
+uživatel si v dialogu **Můj účet** mění PIN a zapíná nebo vypíná denní
+e-mailový souhrn.
+
+Správce může v nastavení stáhnout měsíční export docházky ve formátu CSV
+pro Excel. Soubor obsahuje souhrnný počet skutečně odučených hodin, počet a
+podíl hodin s asistentem a detail rozvrhu včetně učitele, který označil absenci.
+Odpadající hodiny se nezapočítávají a souběžné dělené skupiny tvoří jeden
+vyučovací časový slot.
 
 Při otevření samotného `index.html` nebo verze na GitHub Pages se automaticky
 zobrazí poslední exportovaný týden v režimu pouze pro čtení. Přihlašování,

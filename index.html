@@ -19,6 +19,7 @@
       --lesson-blue: #dcecf8;
       --lesson-blue-border: #afc9dc;
       --lesson-green: #d8f0dd;
+      --lesson-red: #f8d6d6;
       --danger: #b73737;
       --surface: #ffffff;
       --page: #f3f5f6;
@@ -62,6 +63,9 @@
     .notice-empty { color: #8a7d59; font-style: italic; }
     .notice-meta { margin-top: 4px; color: #8a7d59; font-size: 11px; }
     .notice textarea { width: 100%; min-height: 82px; margin: 7px 0; padding: 10px; resize: vertical; border: 1px solid #ceb96e; border-radius: 8px; background: white; }
+    .notice.teacher-message { background: #eef5fb; border-color: #bfd4e4; }
+    .notice.teacher-message .notice-icon { background: #cfe3f2; }
+    .notice.teacher-message .notice-label { color: #365f7b; }
 
     .schedule-panel { overflow: hidden; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); }
     .schedule-toolbar { min-height: 66px; padding: 12px 16px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; border-bottom: 1px solid var(--line); }
@@ -90,6 +94,8 @@
     .lesson.grouped { border-style: dashed; border-width: 2px; }
     .lesson.selected { color: #173a23; background: var(--lesson-green); border: 3px solid var(--assistant); padding: 3px 5px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.8); }
     button.lesson.selected:hover { background: #cae9d1; border-color: #49875d; }
+    .lesson.absent { color: #5d1d1d; background: var(--lesson-red); border: 3px solid var(--danger); padding: 3px 5px; }
+    button.lesson.absent:hover { background: #f1c3c3; border-color: #942c2c; }
     .lesson.cancelled { cursor: default; color: #68737b; background: #e1e4e6 !important; border: 1px solid #aeb6bb; opacity: .82; filter: grayscale(1); }
     .lesson.cancelled .lesson-subject { text-decoration: line-through; text-decoration-thickness: 1px; }
     .lesson-subject { display: block; text-align: center; font-size: 16px; font-weight: 760; line-height: 1.25; }
@@ -97,11 +103,13 @@
     .lesson-meta { position: absolute; left: 7px; right: 7px; bottom: 3px; display: flex; justify-content: space-between; gap: 5px; color: rgba(14, 25, 32, .76); font-size: 9px; }
     .assistant-chip { position: absolute; top: 3px; right: 3px; max-width: 64%; overflow: hidden; padding: 2px 5px; text-overflow: ellipsis; white-space: nowrap; color: #285d39; background: var(--assistant-soft); border-radius: 8px; font-size: 9px; font-weight: 800; }
     .cancelled-chip { position: absolute; top: 3px; right: 3px; padding: 2px 5px; color: #4e585e; background: rgba(255,255,255,.78); border-radius: 8px; font-size: 8px; font-weight: 850; letter-spacing: .04em; }
+    .absent-chip { position: absolute; top: 3px; right: 3px; padding: 2px 5px; color: #7b2020; background: rgba(255,255,255,.82); border-radius: 8px; font-size: 8px; font-weight: 850; }
     .empty-row { padding: 70px 20px !important; text-align: center; color: var(--muted); }
     .loading { display: grid; place-items: center; min-height: 420px; color: var(--muted); }
     .legend { padding: 11px 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 18px; color: var(--muted); border-top: 1px solid var(--soft-line); font-size: 12px; }
     .legend-mark { display: inline-block; width: 18px; height: 13px; margin-right: 5px; vertical-align: -2px; background: var(--lesson-blue); border: 1px solid var(--lesson-blue-border); border-radius: 3px; }
     .legend-mark.selected { background: var(--lesson-green); border: 3px solid var(--assistant); }
+    .legend-mark.absent { background: var(--lesson-red); border: 3px solid var(--danger); }
     .legend-mark.cancelled { background: #d9dddf; border: 1px solid #aeb6bb; }
     #updatedAt { margin-left: auto; }
 
@@ -169,6 +177,7 @@
         <span id="connectionBadge" class="connection-badge hidden">Pouze náhled</span>
         <span id="userName" class="user-name"></span>
         <button id="loginButton" class="btn">Přihlásit</button>
+        <button id="accountButton" class="btn btn-quiet hidden">Můj účet</button>
         <button id="logoutButton" class="btn btn-quiet hidden">Odhlásit</button>
         <button id="settingsButton" class="btn icon-btn" title="Nastavení" aria-label="Nastavení">⚙</button>
       </div>
@@ -180,6 +189,12 @@
       <div class="notice-icon">i</div>
       <div id="noticeArea" class="notice-content"></div>
       <button id="editNoteButton" class="btn btn-quiet hidden">Upravit</button>
+    </section>
+
+    <section class="notice teacher-message" aria-labelledby="teacherMessageLabel">
+      <div class="notice-icon">✉</div>
+      <div id="teacherMessageArea" class="notice-content"></div>
+      <button id="editTeacherMessageButton" class="btn btn-quiet hidden">Upravit</button>
     </section>
 
     <section class="schedule-panel">
@@ -198,6 +213,7 @@
       <div class="legend">
         <span><i class="legend-mark"></i>bez asistenta / zatím neoznačeno</span>
         <span><i class="legend-mark selected"></i>asistent je zapsán</span>
+        <span><i class="legend-mark absent"></i>asistent je nepřítomen</span>
         <span><i class="legend-mark cancelled"></i>hodina odpadá</span>
         <span id="updatedAt"></span>
       </div>
@@ -213,6 +229,23 @@
         <div id="loginError" class="error"></div>
       </div>
       <div class="modal-actions"><button type="button" class="btn close-dialog">Zrušit</button><button class="btn btn-primary">Přihlásit</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="accountDialog">
+    <form id="accountForm">
+      <div class="modal-head"><h2>Můj účet</h2><button type="button" class="btn icon-btn close-dialog" aria-label="Zavřít">×</button></div>
+      <div class="modal-body">
+        <p id="accountRole" class="help"></p>
+        <label class="check" style="margin-bottom:20px"><input id="accountNotify" type="checkbox"> Chci dostávat denní e-mailový souhrn</label>
+        <h3>Změna PINu</h3>
+        <p class="help">Pokud PIN měnit nechcete, pole ponechte prázdná.</p>
+        <div class="field"><label for="accountCurrentPin">Současný PIN</label><input id="accountCurrentPin" type="password" autocomplete="current-password"></div>
+        <div class="field"><label for="accountNewPin">Nový PIN (min. 4 znaky)</label><input id="accountNewPin" type="password" minlength="4" autocomplete="new-password"></div>
+        <div class="field"><label for="accountConfirmPin">Nový PIN znovu</label><input id="accountConfirmPin" type="password" minlength="4" autocomplete="new-password"></div>
+        <div id="accountError" class="error"></div>
+      </div>
+      <div class="modal-actions"><button type="button" class="btn close-dialog">Zrušit</button><button class="btn btn-primary">Uložit</button></div>
     </form>
   </dialog>
 
@@ -236,8 +269,7 @@
             <div class="field"><label for="newName">Jméno</label><input id="newName" required maxlength="100"></div>
             <div class="field"><label for="newEmail">E-mail</label><input id="newEmail" type="email"></div>
             <div class="field"><label for="newPin">PIN (min. 4 znaky)</label><input id="newPin" type="password" minlength="4" required></div>
-            <div></div>
-            <label class="check"><input id="newCanEdit" type="checkbox" checked> Může zapisovat asistenta</label>
+            <div class="field"><label for="newRole">Role</label><select id="newRole"><option value="assistant">Asistent</option><option value="teacher">Učitel</option></select></div>
             <label class="check"><input id="newNotify" type="checkbox"> Dostává denní souhrn</label>
             <div class="wide" style="margin-top:14px"><button class="btn btn-primary">Přidat uživatele</button></div>
           </form>
@@ -246,6 +278,14 @@
           <h3>Upozornění</h3>
           <p id="smtpStatus" class="help"></p>
           <button id="sendDigest" class="btn">Odeslat neodeslaný souhrn teď</button>
+        </section>
+        <section class="settings-section">
+          <h3>Export docházky</h3>
+          <p class="help">CSV obsahuje souhrn i detail skutečně odučených hodin. Otevřete ho přímo v Excelu.</p>
+          <div style="display:flex; gap:8px; align-items:end">
+            <div class="field" style="flex:1; margin:0"><label for="exportMonth">Měsíc</label><input id="exportMonth" type="month" required></div>
+            <button id="downloadExport" class="btn btn-primary">Stáhnout CSV</button>
+          </div>
         </section>
         <section class="settings-section">
           <h3>Ukončené měsíce</h3>
@@ -318,6 +358,7 @@
         ...data,
         selections: [],
         whole_class_exclusions: [],
+        absences: [],
         from_cache: true,
         cache_warning: 'Server není spuštěný. Zobrazuji poslední export pouze pro čtení.'
       };
@@ -336,6 +377,7 @@
           current_user: null,
           login_users: [],
           note: { text: 'Server není spuštěný – poznámky a zápis asistenta jsou dostupné po spuštění python server.py.' },
+          teacher_message: { text: 'Server není spuštěný – zprávy jsou dostupné po spuštění python server.py.' },
           smtp_ready: false,
           admin_uses_default_password: false
         };
@@ -350,6 +392,7 @@
             current_user: null,
             login_users: [],
             note: { text: 'Server není spuštěný – poznámky a zápis asistenta jsou dostupné po spuštění python server.py.' },
+            teacher_message: { text: 'Server není spuštěný – zprávy jsou dostupné po spuštění python server.py.' },
             smtp_ready: false,
             admin_uses_default_password: false
           };
@@ -357,6 +400,7 @@
       }
       renderAccount();
       renderNote();
+      renderTeacherMessage();
       if (state.week) renderWeek();
     }
     async function loadWeek(refresh = false) {
@@ -401,6 +445,7 @@
           renderAccount();
           // Během rozepsané poznámky nesmí synchronizace zahodit text uživatele.
           if (!document.getElementById('noteInput')) renderNote();
+          if (!document.getElementById('teacherMessageInput')) renderTeacherMessage();
         }
         // Uživatel mohl během požadavku přepnout týden.
         if (iso(state.weekStart) === requestedStart) {
@@ -421,8 +466,10 @@
       document.getElementById('userName').textContent = user?.name || '';
       document.getElementById('connectionBadge').classList.toggle('hidden', !offline);
       document.getElementById('loginButton').classList.toggle('hidden', !!user || offline);
+      document.getElementById('accountButton').classList.toggle('hidden', !user);
       document.getElementById('logoutButton').classList.toggle('hidden', !user);
-      document.getElementById('editNoteButton').classList.toggle('hidden', !user?.can_edit);
+      document.getElementById('editNoteButton').classList.toggle('hidden', user?.role !== 'assistant');
+      document.getElementById('editTeacherMessageButton').classList.toggle('hidden', user?.role !== 'teacher');
       document.getElementById('settingsButton').classList.toggle('hidden', offline);
       document.getElementById('defaultPasswordWarning').classList.toggle('hidden', !state.status?.admin_uses_default_password);
     }
@@ -449,6 +496,31 @@
         await api('/api/note', { method: 'POST', body: JSON.stringify({ text: document.getElementById('noteInput').value }) });
         await loadStatus();
         toast('Poznámka byla uložena.');
+      } catch (error) { toast(error.message, true); }
+    }
+
+    function renderTeacherMessage(editing = false) {
+      const area = document.getElementById('teacherMessageArea');
+      const message = state.status?.teacher_message || { text: '' };
+      if (editing) {
+        area.innerHTML = `<div id="teacherMessageLabel" class="notice-label">Zpráva učitele pro asistenta</div>
+          <textarea id="teacherMessageInput" maxlength="2000" placeholder="Napište zprávu pro asistenta…">${escapeHtml(message.text || '')}</textarea>
+          <div><button id="saveTeacherMessage" class="btn btn-primary">Uložit zprávu</button> <button id="cancelTeacherMessage" class="btn">Zrušit</button></div>`;
+        document.getElementById('saveTeacherMessage').onclick = saveTeacherMessage;
+        document.getElementById('cancelTeacherMessage').onclick = () => renderTeacherMessage(false);
+        document.getElementById('teacherMessageInput').focus();
+        return;
+      }
+      const meta = message.updated_at ? `<div class="notice-meta">Naposledy upravil/a ${escapeHtml(message.user_name || '')} · ${new Date(message.updated_at).toLocaleString('cs-CZ')}</div>` : '';
+      area.innerHTML = `<div id="teacherMessageLabel" class="notice-label">Zpráva učitele pro asistenta</div>
+        <div class="notice-text ${message.text ? '' : 'notice-empty'}">${escapeHtml(message.text || 'Bez aktuální zprávy')}</div>${meta}`;
+    }
+
+    async function saveTeacherMessage() {
+      try {
+        await api('/api/teacher-message', { method: 'POST', body: JSON.stringify({ text: document.getElementById('teacherMessageInput').value }) });
+        await loadStatus();
+        toast('Zpráva pro asistenta byla uložena.');
       } catch (error) { toast(error.message, true); }
     }
 
@@ -489,19 +561,24 @@
       const excluded = (state.week.whole_class_exclusions || []).some(item =>
         item.lesson_date === lesson.date && String(item.period) === String(lesson.period) && item.lesson_key === lesson.key
       );
+      const absence = (state.week.absences || []).find(item =>
+        item.lesson_date === lesson.date && String(item.period) === String(lesson.period) && item.lesson_key === lesson.key
+      );
       const selected = !cancelled && (grouped ? selection?.lesson_key === lesson.key : !excluded);
-      const canEdit = !!state.status?.current_user?.can_edit;
+      const role = state.status?.current_user?.role;
+      const canEdit = role === 'assistant' || role === 'teacher';
       const interactive = !cancelled;
       const tag = interactive ? 'button' : 'div';
       const disabled = interactive && !canEdit ? ' disabled' : '';
       const selectedChip = selected
         ? `<span class="assistant-chip">AP${grouped && selection?.user_name ? ` · ${escapeHtml(selection.user_name)}` : ''}</span>`
         : '';
+      const absentChip = absence ? '<span class="absent-chip">NEPŘÍTOMEN</span>' : '';
       const cancelledChip = cancelled ? '<span class="cancelled-chip">ODPADÁ</span>' : '';
       const label = `${lesson.subject}${grouped ? `, skupina ${lesson.groups.join(', ')}` : ''}, ${lesson.teacher || ''}`;
-      return `<${tag} class="lesson ${grouped ? 'grouped' : 'whole'} ${selected ? 'selected' : ''} ${cancelled ? 'cancelled' : ''}" ${disabled}
-        ${interactive ? `data-date="${lesson.date}" data-period="${escapeHtml(lesson.period)}" data-key="${lesson.key}" data-kind="${grouped ? 'group' : 'whole'}" data-selected="${selected}" aria-label="${escapeHtml(label)}"` : ''}>
-        ${selectedChip}${cancelledChip}${grouped ? `<span class="lesson-group">${escapeHtml(lesson.groups.join(', '))}</span>` : ''}
+      return `<${tag} class="lesson ${grouped ? 'grouped' : 'whole'} ${selected ? 'selected' : ''} ${absence ? 'absent' : ''} ${cancelled ? 'cancelled' : ''}" ${disabled}
+        ${interactive ? `data-date="${lesson.date}" data-period="${escapeHtml(lesson.period)}" data-key="${lesson.key}" data-kind="${grouped ? 'group' : 'whole'}" data-selected="${selected}" data-absent="${!!absence}" aria-label="${escapeHtml(label)}"` : ''}>
+        ${absence ? absentChip : selectedChip}${cancelledChip}${grouped ? `<span class="lesson-group">${escapeHtml(lesson.groups.join(', '))}</span>` : ''}
         <span class="lesson-subject">${escapeHtml(lesson.subject || '—')}</span>
         <span class="lesson-meta"><span>${escapeHtml(lesson.teacher || '')}</span><span>${escapeHtml(lesson.classroom || '')}</span></span>
       </${tag}>`;
@@ -511,6 +588,16 @@
       const button = event.currentTarget;
       const removing = button.dataset.selected === 'true';
       try {
+        if (state.status?.current_user?.role === 'teacher') {
+          const markingAbsent = button.dataset.absent !== 'true';
+          await api('/api/absence', { method: 'POST', body: JSON.stringify({
+            date: button.dataset.date, period: button.dataset.period,
+            lesson_key: button.dataset.key, absent: markingAbsent
+          }) });
+          await loadWeek();
+          toast(markingAbsent ? 'Nepřítomnost asistenta byla zapsána.' : 'Nepřítomnost asistenta byla zrušena.');
+          return;
+        }
         if (button.dataset.kind === 'whole') {
           await api('/api/whole-class', { method: 'POST', body: JSON.stringify({
             date: button.dataset.date, period: button.dataset.period,
@@ -530,7 +617,7 @@
     function openLogin() {
       const users = state.status?.login_users || [];
       document.getElementById('loginUser').innerHTML = users.length
-        ? users.map(user => `<option value="${user.id}">${escapeHtml(user.name)}</option>`).join('')
+        ? users.map(user => `<option value="${user.id}">${escapeHtml(user.name)} – ${user.role === 'teacher' ? 'učitel' : 'asistent'}</option>`).join('')
         : '<option value="">Nejdříve přidejte uživatele v nastavení</option>';
       document.getElementById('loginPin').value = '';
       document.getElementById('loginError').textContent = '';
@@ -546,6 +633,42 @@
         renderWeek();
         toast('Přihlášení proběhlo úspěšně.');
       } catch (error) { document.getElementById('loginError').textContent = error.message; }
+    }
+
+    function openAccount() {
+      const user = state.status.current_user;
+      document.getElementById('accountRole').textContent = `${user.role === 'teacher' ? 'Učitel' : 'Asistent'} · ${user.email || 'bez e-mailové adresy'}`;
+      document.getElementById('accountNotify').checked = !!user.notify;
+      document.getElementById('accountCurrentPin').value = '';
+      document.getElementById('accountNewPin').value = '';
+      document.getElementById('accountConfirmPin').value = '';
+      document.getElementById('accountError').textContent = '';
+      document.getElementById('accountDialog').showModal();
+    }
+
+    async function saveAccount(event) {
+      event.preventDefault();
+      const currentPin = document.getElementById('accountCurrentPin').value;
+      const newPin = document.getElementById('accountNewPin').value;
+      const confirmPin = document.getElementById('accountConfirmPin').value;
+      if (newPin !== confirmPin) {
+        document.getElementById('accountError').textContent = 'Nové PINy se neshodují.';
+        return;
+      }
+      if ((currentPin || confirmPin) && !newPin) {
+        document.getElementById('accountError').textContent = 'Vyplňte nový PIN.';
+        return;
+      }
+      try {
+        await api('/api/account', { method: 'PATCH', body: JSON.stringify({
+          notify: document.getElementById('accountNotify').checked,
+          current_pin: currentPin,
+          new_pin: newPin
+        }) });
+        document.getElementById('accountDialog').close();
+        await loadStatus();
+        toast(newPin ? 'Nastavení i PIN byly změněny.' : 'Nastavení e-mailů bylo změněno.');
+      } catch (error) { document.getElementById('accountError').textContent = error.message; }
     }
 
     function openSettings() {
@@ -579,13 +702,16 @@
         ? months.months.map(row => `<option value="${row.month}">${row.month} (${row.records} zápisů)</option>`).join('')
         : '<option value="">Žádná data ke smazání</option>';
       document.getElementById('deleteMonth').disabled = !months.months.length;
+      if (!document.getElementById('exportMonth').value) {
+        document.getElementById('exportMonth').value = iso(new Date()).slice(0, 7);
+      }
     }
 
     function renderUsers(users) {
       const list = document.getElementById('usersList');
       list.innerHTML = users.length ? users.map(user => `<div class="user-row" data-user-id="${user.id}">
-        <div><strong>${escapeHtml(user.name)}</strong><small>${escapeHtml(user.email || 'bez e-mailu')}${user.active ? '' : ' · neaktivní'}</small></div>
-        ${user.can_edit ? '<span class="pill">zapisuje</span>' : ''}${user.notify ? '<span class="pill">souhrn</span>' : ''}
+        <div><strong>${escapeHtml(user.name)}</strong><small>${escapeHtml(user.email || 'bez e-mailu')}</small></div>
+        <span class="pill">${user.role === 'teacher' ? 'učitel' : 'asistent'}</span>${user.notify ? '<span class="pill">souhrn</span>' : '<span></span>'}
         <span><button class="btn btn-quiet edit-user">Upravit</button><button class="btn btn-quiet btn-danger delete-user" title="Odebrat">×</button></span>
       </div>`).join('') : '<p class="help">Zatím není přidán žádný uživatel.</p>';
       list.querySelectorAll('.edit-user').forEach(button => button.onclick = () => editUser(users.find(user => user.id === Number(button.closest('.user-row').dataset.userId))));
@@ -597,10 +723,12 @@
       if (name === null) return;
       const email = prompt('E-mail (může zůstat prázdný):', user.email || '');
       if (email === null) return;
-      const canEdit = confirm('Má uživatel právo zapisovat?\nOK = ano, Zrušit = ne');
+      const role = prompt('Role uživatele (assistant nebo teacher):', user.role);
+      if (role === null) return;
+      if (!['assistant', 'teacher'].includes(role)) return toast('Role musí být assistant nebo teacher.', true);
       const notify = confirm('Má uživatel dostávat denní e-mailový souhrn?\nOK = ano, Zrušit = ne');
       try {
-        await api(`/api/admin/users/${user.id}`, { method: 'PATCH', headers: adminHeaders(), body: JSON.stringify({ name, email, can_edit: canEdit, notify }) });
+        await api(`/api/admin/users/${user.id}`, { method: 'PATCH', headers: adminHeaders(), body: JSON.stringify({ name, email, role, notify }) });
         await loadAdmin();
         await loadStatus();
         toast('Uživatel byl upraven.');
@@ -613,24 +741,23 @@
         name: document.getElementById('newName').value,
         email: document.getElementById('newEmail').value,
         pin: document.getElementById('newPin').value,
-        can_edit: document.getElementById('newCanEdit').checked,
+        role: document.getElementById('newRole').value,
         notify: document.getElementById('newNotify').checked
       };
       try {
         await api('/api/admin/users', { method: 'POST', headers: adminHeaders(), body: JSON.stringify(body) });
         event.target.reset();
-        document.getElementById('newCanEdit').checked = true;
         await Promise.all([loadAdmin(), loadStatus()]);
         toast('Uživatel byl přidán.');
       } catch (error) { toast(error.message, true); }
     }
 
     async function deleteUser(user) {
-      if (!confirm(`Opravdu odebrat uživatele ${user.name}?`)) return;
+      if (!confirm(`Opravdu trvale zrušit účet ${user.name}? Historické zápisy zůstanou zachovány.`)) return;
       try {
         await api(`/api/admin/users/${user.id}`, { method: 'DELETE', headers: adminHeaders() });
         await Promise.all([loadAdmin(), loadStatus()]);
-        toast('Uživatel byl odebrán.');
+        toast('Uživatelský účet byl trvale zrušen.');
       } catch (error) { toast(error.message, true); }
     }
 
@@ -644,18 +771,55 @@
       } catch (error) { toast(error.message, true); }
     }
 
+    async function downloadExport() {
+      const month = document.getElementById('exportMonth').value;
+      if (!month) return toast('Vyberte měsíc exportu.', true);
+      const button = document.getElementById('downloadExport');
+      button.disabled = true;
+      button.textContent = 'Připravuji…';
+      try {
+        const response = await fetch(`/api/admin/export?month=${encodeURIComponent(month)}`, {
+          cache: 'no-store',
+          headers: adminHeaders()
+        });
+        if (!response.ok) {
+          let data = {};
+          try { data = await response.json(); } catch {}
+          throw new Error(data.error || `Chyba HTTP ${response.status}`);
+        }
+        const url = URL.createObjectURL(await response.blob());
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `asistent-${month}.csv`;
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(url);
+        toast('Export byl stažen.');
+      } catch (error) {
+        toast(error.message, true);
+      } finally {
+        button.disabled = false;
+        button.textContent = 'Stáhnout CSV';
+      }
+    }
+
     document.getElementById('prevWeek').onclick = () => { state.weekStart = addDays(state.weekStart, -7); loadWeek(); };
     document.getElementById('nextWeek').onclick = () => { state.weekStart = addDays(state.weekStart, 7); loadWeek(); };
     document.getElementById('todayWeek').onclick = () => { state.weekStart = monday(new Date()); loadWeek(); };
     document.getElementById('refreshButton').onclick = () => loadWeek(true);
     document.getElementById('loginButton').onclick = openLogin;
     document.getElementById('loginForm').onsubmit = submitLogin;
+    document.getElementById('accountButton').onclick = openAccount;
+    document.getElementById('accountForm').onsubmit = saveAccount;
     document.getElementById('logoutButton').onclick = async () => { await api('/api/logout', { method: 'POST' }); await loadStatus(); renderWeek(); toast('Byli jste odhlášeni.'); };
     document.getElementById('editNoteButton').onclick = () => renderNote(true);
+    document.getElementById('editTeacherMessageButton').onclick = () => renderTeacherMessage(true);
     document.getElementById('settingsButton').onclick = openSettings;
     document.getElementById('unlockAdmin').onclick = unlockAdmin;
     document.getElementById('addUserForm').onsubmit = addUser;
     document.getElementById('deleteMonth').onclick = deleteMonth;
+    document.getElementById('downloadExport').onclick = downloadExport;
     document.getElementById('sendDigest').onclick = async () => {
       try {
         const result = await api('/api/admin/send-digest', { method: 'POST', headers: adminHeaders() });

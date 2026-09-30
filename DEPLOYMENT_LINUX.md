@@ -265,11 +265,15 @@ V prohlížeči následně ověřit:
 
 1. načtení aktuálního i následujícího týdne;
 2. přihlášení do nastavení heslem `ASSISTANT_ADMIN_PASSWORD`;
-3. vytvoření zapisujícího uživatele s PINem;
-4. označení skupiny a odškrtnutí hodiny celé třídy;
-5. uložení poznámky;
-6. opětovné načtení stránky a zachování změn;
-7. ruční odeslání e-mailového souhrnu v nastavení.
+3. vytvoření uživatele role asistent a uživatele role učitel;
+4. přihlášení asistenta, změnu vlastního PINu, označení skupiny a uložení poznámky;
+5. přihlášení učitele, uložení zprávy a označení absence asistenta;
+6. červené zobrazení absence na jiném zařízení nejpozději do 15 sekund;
+7. zapnutí e-mailového souhrnu v dialogu **Můj účet**;
+8. úplné zrušení testovacího uživatele se zachování historických zápisů;
+9. ruční odeslání e-mailového souhrnu v nastavení a kontrolu data,
+   přítomnosti, poznámky asistenta a zprávy učitele;
+10. stažení měsíčního CSV exportu a kontrolu souhrnných počtů i označených absencí.
 
 Automatický e-mailový souhrn se odesílá v 16:00 Europe/Prague, pokud existují
 neodeslané změny a alespoň jeden aktivní příjemce s e-mailovou adresou. Proces
