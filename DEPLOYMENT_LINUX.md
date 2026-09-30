@@ -169,50 +169,63 @@ sudo journalctl -u rozvrh-asistent -f
 
 ## 6. HTTPS reverzní proxy
 
-### Varianta A: existující školní Nginx
+### Varianta A: existující školní Apache
 
-Do konfigurace virtuálních serverů doplnit ekvivalent:
+Apache musí mít aktivní moduly `proxy`, `proxy_http`, `ssl` a `headers`. Na
+Debianu/Ubuntu je lze aktivovat příkazem:
 
-```nginx
-server {
-    listen 80;
-    listen [::]:80;
-    server_name asistent.arcig.cz;
-    return 301 https://$host$request_uri;
-}
+```bash
+sudo a2enmod proxy proxy_http ssl headers
+```
 
-server {
-    listen 443 ssl http2;
-    listen [::]:443 ssl http2;
-    server_name asistent.arcig.cz;
+Do konfigurace virtuálních serverů, například do souboru
+`/etc/apache2/sites-available/asistent.arcig.cz.conf`, vložit:
 
-    ssl_certificate     /CESTA/K/CERTIFIKATU/fullchain.pem;
-    ssl_certificate_key /CESTA/K/PRIVATNIMU_KLICI/privkey.pem;
+```apache
+<VirtualHost *:80>
+    ServerName asistent.arcig.cz
+    Redirect permanent / https://asistent.arcig.cz/
+</VirtualHost>
 
-    client_max_body_size 1m;
+<VirtualHost *:443>
+    ServerName asistent.arcig.cz
 
-    location / {
-        proxy_pass http://127.0.0.1:8000;
-        proxy_http_version 1.1;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
+    SSLEngine on
+    SSLCertificateFile /CESTA/K/CERTIFIKATU/fullchain.pem
+    SSLCertificateKeyFile /CESTA/K/PRIVATNIMU_KLICI/privkey.pem
 
-    add_header X-Content-Type-Options "nosniff" always;
-    add_header Referrer-Policy "same-origin" always;
-    add_header Permissions-Policy "camera=(), microphone=(), geolocation=()" always;
-}
+    ProxyRequests Off
+    ProxyPreserveHost On
+    ProxyPass        / http://127.0.0.1:8000/
+    ProxyPassReverse / http://127.0.0.1:8000/
+
+    # Apache přidává X-Forwarded-For automaticky.
+    RequestHeader set X-Forwarded-Proto "https"
+    RequestHeader set X-Real-IP expr=%{REMOTE_ADDR}
+
+    LimitRequestBody 1048576
+
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Referrer-Policy "same-origin"
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+
+    ErrorLog ${APACHE_LOG_DIR}/asistent-error.log
+    CustomLog ${APACHE_LOG_DIR}/asistent-access.log combined
+</VirtualHost>
 ```
 
 Certifikát získat a obnovovat postupem, který škola používá pro ostatní
-subdomény. Poté ověřit a načíst konfiguraci:
+subdomény. Na Debianu/Ubuntu poté web aktivovat, ověřit konfiguraci a Apache
+znovu načíst:
 
 ```bash
-sudo nginx -t
-sudo systemctl reload nginx
+sudo a2ensite asistent.arcig.cz.conf
+sudo apache2ctl configtest
+sudo systemctl reload apache2
 ```
+
+Na distribucích rodiny RHEL bývá konfigurace v `/etc/httpd/conf.d/` a služba se
+jmenuje `httpd`; samostatný příkaz `a2ensite` se tam nepoužívá.
 
 ### Varianta B: Caddy
 
