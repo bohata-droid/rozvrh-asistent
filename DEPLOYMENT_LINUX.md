@@ -307,20 +307,118 @@ Obnova:
 4. nastavit vlastníka `rozvrh:rozvrh` a režim `0600`;
 5. znovu spustit službu a ověřit `/api/health`.
 
-## 9. Aktualizace aplikace
+## 9. Aktualizace původní verze na verzi s rolemi a exportem
 
-Před aktualizací provést zálohu databáze. Poté:
+Tento postup platí pro instalaci podle tohoto návodu: Apache funguje pouze jako
+HTTPS reverzní proxy, aplikace běží jako `rozvrh-asistent.service`, zdrojový kód
+je v `/opt/rozvrh-asistent` a databáze v
+`/var/lib/rozvrh-asistent/assistant.db`. Konfiguraci Apache není při této
+aktualizaci nutné měnit ani Apache restartovat.
+
+Postup spustit až poté, co je nová verze commitnutá a odeslaná do větve
+`origin/main`, ze které je produkční server aktualizován.
+
+### 9.1 Kontrola serveru před aktualizací
+
+Nejprve ověřit, že služba běží a repozitář neobsahuje neuložené lokální
+změny:
 
 ```bash
-sudo git -C /opt/rozvrh-asistent pull --ff-only origin main
-sudo python3 -m py_compile /opt/rozvrh-asistent/fetch_timetable.py /opt/rozvrh-asistent/server.py
-sudo systemctl restart rozvrh-asistent
 sudo systemctl status rozvrh-asistent
+sudo git -C /opt/rozvrh-asistent status --short
+sudo git -C /opt/rozvrh-asistent rev-parse HEAD
+```
+
+Příkaz `status --short` nemá nic vypsat. Pokud něco vypíše, aktualizaci
+zastavit a nejprve zjistit, kdo a proč soubory na serveru změnil. Aktuální hash
+z `rev-parse HEAD` uložit k provoznímu záznamu; označuje verzi před aktualizací.
+
+### 9.2 Konzistentní záloha databáze
+
+Nevytvářet prostou kopii samotného `assistant.db`, protože SQLite používá
+WAL. Před aktualizací vytvořit a zkontrolovat SQLite zálohu:
+
+```bash
+sudo install -d -o rozvrh -g rozvrh -m 0750 /var/backups/rozvrh-asistent
+stamp=$(date +%F-%H%M)
+backup="/var/backups/rozvrh-asistent/assistant-before-upgrade-${stamp}.db"
+sudo -u rozvrh sqlite3 /var/lib/rozvrh-asistent/assistant.db ".backup '${backup}'"
+sudo -u rozvrh sqlite3 "${backup}" "PRAGMA integrity_check;"
+sudo ls -lh "${backup}"
+```
+
+Kontrola musí vypsat `ok` a soubor nesmí mít nulovou velikost. Cestu k záloze
+si poznamenat pro případ návratu k původní verzi.
+
+### 9.3 Stažení a kontrola nové verze
+
+Po vytvoření zálohy zastavit aplikaci. Apache zůstane spuštěný, ale během
+krátké aktualizace bude aplikace vracet chybu nedostupného backendu.
+
+```bash
+sudo systemctl stop rozvrh-asistent
+sudo git -C /opt/rozvrh-asistent pull --ff-only origin main
+sudo python3 -m py_compile /opt/rozvrh-asistent/fetch_timetable.py /opt/rozvrh-asistent/server.py /opt/rozvrh-asistent/test_server.py
+sudo python3 -m unittest discover -v -s /opt/rozvrh-asistent -p 'test_*.py'
+```
+
+`git pull --ff-only` se musí dokončit bez konfliktu, kontrola syntaxe bez výpisu
+chyby a všechny testy musí skončit stavem `OK`. Pokud některý krok selže,
+službu zatím nespouštět a chybu vyřešit nebo vrátit původní verzi kódu.
+
+### 9.4 Spuštění a automatická migrace databáze
+
+Při prvním startu nová verze sama doplní databázové sloupce a tabulky pro
+role, zprávu učitele, absence a export. Nespouští se žádný samostatný SQL
+skript a původní databáze se nemaže ani nenahrazuje.
+
+```bash
+sudo systemctl start rozvrh-asistent
+sudo systemctl status rozvrh-asistent
+sudo journalctl -u rozvrh-asistent --since "10 minutes ago" --no-pager
+curl --fail --silent --show-error http://127.0.0.1:8000/api/health
 curl --fail --silent --show-error https://asistent.arcig.cz/api/health
 ```
 
-Databázové tabulky se při startu vytvářejí a doplňují automaticky. Restart
-zruší pouze přihlášené webové relace; uživatelé se znovu přihlásí PINem.
+Oba požadavky musí vrátit `{"ok": true}`. V logu nesmí být chyba SQLite,
+`Permission denied` ani opakované restarty služby. Apache se nereloaduje, protože
+jeho `ProxyPass` i TLS konfigurace zůstávají beze změny.
+
+### 9.5 Kontrola dat a nových funkcí
+
+Při migraci se dosavadní uživatelé, kteří mohli zapisovat, převedou na roli
+**asistent**. Ostatní dosavadní účty se převedou na roli **učitel**. Správce
+musí po aktualizaci role zkontrolovat a případně opravit.
+
+V prohlížeči provést tento kontrolní postup:
+
+1. otevřít aplikaci v novém anonymním okně a ověřit původní uživatele,
+   poznámku a zápisy v rozvrhu;
+2. v administraci zkontrolovat role a e-mailové adresy všech uživatelů;
+3. vyzkoušet přihlášení asistenta, změnu PINu a zápis hodiny;
+4. vyzkoušet přihlášení učitele, zprávu pro asistenta a červené
+   označení absence;
+5. na druhém zařízení ověřit propsání změny nejpozději do 15 sekund;
+6. v **Nastavení → Export docházky** stáhnout CSV za zvolený měsíc a
+   otevřít jej v Excelu;
+7. zkontrolovat souhrnný počet odučených hodin, počet hodin s asistentem
+   a u označené absence datum, konkrétní hodinu a jméno učitele;
+8. pokud je nastavené SMTP, ručně odeslat testovací souhrn.
+
+První export dříve nenavštíveného měsíce může trvat déle, protože
+server musí načíst jednotlivé týdny z EduPage. Další export použije uloženou
+mezipaměť.
+
+### 9.6 Návrat při neúspěšné aktualizaci
+
+Pokud služba po aktualizaci nenaběhne, ponechat ji zastavenou, uložit výpis
+`journalctl` a obnovit původní verzi kódu i databázi ze zálohy vytvořené v
+kroku 9.2. Databázi obnovovat pouze při zastavené službě podle postupu v
+kapitole 8. Po obnově zkontrolovat vlastníka `rozvrh:rozvrh`, oprávnění `0600`,
+spustit službu a znovu ověřit oba endpointy `/api/health`.
+
+Restart aplikace zruší pouze přihlášené webové relace; uživatelé se po
+aktualizaci znovu přihlásí PINem.
 
 ## 10. Bezpečnostní poznámky
 
