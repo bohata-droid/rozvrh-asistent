@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-09T11:39:30.273958+00:00",
-  "range_start": "2026-10-05",
-  "range_end": "2026-10-09",
+  "updated_at": "2026-10-13T12:27:46.804787+00:00",
+  "range_start": "2026-10-12",
+  "range_end": "2026-10-16",
   "class": "2.A",
   "periods": [
     {
@@ -57,8 +57,8 @@
   ],
   "lessons": [
     {
-      "key": "75bdcf79f1f6548c",
-      "date": "2026-10-05",
+      "key": "582a15449187002b",
+      "date": "2026-10-12",
       "period": "1",
       "start": "08:15",
       "end": "09:00",
@@ -73,8 +73,8 @@
       "removed": false
     },
     {
-      "key": "2b84b5dd19f56072",
-      "date": "2026-10-05",
+      "key": "a769ddd705057f57",
+      "date": "2026-10-12",
       "period": "1",
       "start": "08:15",
       "end": "09:00",
@@ -89,8 +89,8 @@
       "removed": false
     },
     {
-      "key": "612265a9d3bba141",
-      "date": "2026-10-05",
+      "key": "80cb9b2e434a3c43",
+      "date": "2026-10-12",
       "period": "14-00",
       "start": "14:00",
       "end": "15:00",
@@ -103,8 +103,8 @@
       "removed": false
     },
     {
-      "key": "cf95aba02c91986d",
-      "date": "2026-10-05",
+      "key": "efdab074c340ec34",
+      "date": "2026-10-12",
       "period": "14-00",
       "start": "14:00",
       "end": "16:00",
@@ -117,8 +117,8 @@
       "removed": false
     },
     {
-      "key": "8cc3d92cd5994015",
-      "date": "2026-10-05",
+      "key": "51d469b983fdd9c5",
+      "date": "2026-10-12",
       "period": "2",
       "start": "09:10",
       "end": "09:55",
@@ -131,8 +131,8 @@
       "removed": false
     },
     {
-      "key": "095af06ab23aa758",
-      "date": "2026-10-05",
+      "key": "84448d3a0073ee7e",
+      "date": "2026-10-12",
       "period": "3",
       "start": "10:15",
       "end": "11:00",
@@ -147,8 +147,8 @@
       "removed": false
     },
     {
-      "key": "6020923b75453370",
-      "date": "2026-10-05",
+      "key": "6634d6a72d1e00dd",
+      "date": "2026-10-12",
       "period": "3",
       "start": "10:15",
       "end": "11:00",
@@ -163,8 +163,8 @@
       "removed": false
     },
     {
-      "key": "77201d2ec0c05019",
-      "date": "2026-10-05",
+      "key": "34e71e91d288e2ce",
+      "date": "2026-10-12",
       "period": "4",
       "start": "11:10",
       "end": "11:55",
@@ -179,8 +179,8 @@
       "removed": false
     },
     {
-      "key": "58a6656f158dfee7",
-      "date": "2026-10-05",
+      "key": "f30bbd3a92aee380",
+      "date": "2026-10-12",
       "period": "4",
       "start": "11:10",
       "end": "11:55",
@@ -195,8 +195,8 @@
       "removed": false
     },
     {
-      "key": "4f4dcfdac670e426",
-      "date": "2026-10-05",
+      "key": "80ea859c4d94b825",
+      "date": "2026-10-12",
       "period": "5",
       "start": "12:05",
       "end": "12:50",
@@ -211,8 +211,8 @@
       "removed": false
     },
     {
-      "key": "6d1dc0e6d7c2fc4f",
-      "date": "2026-10-05",
+      "key": "2e08c822811a4c4c",
+      "date": "2026-10-12",
       "period": "5",
       "start": "12:05",
       "end": "12:50",
@@ -221,14 +221,14 @@
       "groups": [
         "AJ2"
       ],
-      "teacher": "Di",
+      "teacher": "Da",
       "classroom": "504",
-      "changed": true,
+      "changed": false,
       "removed": false
     },
     {
-      "key": "b182c71fcfac4fb2",
-      "date": "2026-10-05",
+      "key": "3486377606403810",
+      "date": "2026-10-12",
       "period": "6",
       "start": "13:00",
       "end": "13:45",
@@ -241,8 +241,8 @@
       "removed": false
     },
     {
-      "key": "3d6a3953ba6c0e21",
-      "date": "2026-10-06",
+      "key": "125df286e160aba2",
+      "date": "2026-10-13",
       "period": "1",
       "start": "08:15",
       "end": "09:00",
@@ -255,8 +255,8 @@
       "removed": false
     },
     {
-      "key": "bdf5a7a9d1acd1cc",
-      "date": "2026-10-06",
+      "key": "a88209bddf815363",
+      "date": "2026-10-13",
       "period": "2",
       "start": "09:10",
       "end": "09:55",
@@ -266,59 +266,11 @@
       "teacher": "Gr, DM",
       "classroom": "405",
       "changed": false,
-      "removed": true
-    },
-    {
-      "key": "c9f2c59afc9383fb",
-      "date": "2026-10-06",
-      "period": "2",
-      "start": "09:10",
-      "end": "09:55",
-      "duration_periods": 1,
-      "subject": "CH",
-      "groups": [
-        "AJ1"
-      ],
-      "teacher": "Gr, DM",
-      "classroom": "403",
-      "changed": true,
       "removed": false
     },
     {
-      "key": "63e6f7ad05759ebe",
-      "date": "2026-10-06",
-      "period": "2",
-      "start": "09:10",
-      "end": "09:55",
-      "duration_periods": 1,
-      "subject": "CJL",
-      "groups": [
-        "AJ2"
-      ],
-      "teacher": "Hb, DM",
-      "classroom": "105",
-      "changed": true,
-      "removed": false
-    },
-    {
-      "key": "d2f29f1d811773c2",
-      "date": "2026-10-06",
-      "period": "3",
-      "start": "10:15",
-      "end": "11:00",
-      "duration_periods": 1,
-      "subject": "CH",
-      "groups": [
-        "AJ2"
-      ],
-      "teacher": "Gr, DM",
-      "classroom": "403",
-      "changed": true,
-      "removed": false
-    },
-    {
-      "key": "34f485286e0a68cd",
-      "date": "2026-10-06",
+      "key": "8a5642eef6fc9fea",
+      "date": "2026-10-13",
       "period": "3",
       "start": "10:15",
       "end": "11:00",
@@ -328,27 +280,11 @@
       "teacher": "Hb, DM",
       "classroom": "105",
       "changed": false,
-      "removed": true
-    },
-    {
-      "key": "619ad575a25614a7",
-      "date": "2026-10-06",
-      "period": "3",
-      "start": "10:15",
-      "end": "11:00",
-      "duration_periods": 1,
-      "subject": "CJL",
-      "groups": [
-        "AJ1"
-      ],
-      "teacher": "Hb, DM",
-      "classroom": "105",
-      "changed": true,
       "removed": false
     },
     {
-      "key": "d589458cd378f0b2",
-      "date": "2026-10-06",
+      "key": "5a72b4e6d0769d17",
+      "date": "2026-10-13",
       "period": "4",
       "start": "11:10",
       "end": "11:55",
@@ -361,38 +297,8 @@
       "removed": false
     },
     {
-      "key": "65c4b0a8fa50d0c1",
-      "date": "2026-10-06",
-      "period": "5",
-      "start": "12:05",
-      "end": "12:50",
-      "duration_periods": 1,
-      "subject": "Z",
-      "groups": [],
-      "teacher": "Tr, DM",
-      "classroom": "105",
-      "changed": true,
-      "removed": false
-    },
-    {
-      "key": "320173197f1fed16",
-      "date": "2026-10-06",
-      "period": "6",
-      "start": "13:00",
-      "end": "13:45",
-      "duration_periods": 1,
-      "subject": "KAJ",
-      "groups": [
-        "AJ1"
-      ],
-      "teacher": "Ha",
-      "classroom": "002",
-      "changed": true,
-      "removed": false
-    },
-    {
-      "key": "75a1d53e3494c979",
-      "date": "2026-10-06",
+      "key": "9ac6d6e614524c2d",
+      "date": "2026-10-13",
       "period": "6",
       "start": "13:00",
       "end": "13:45",
@@ -402,11 +308,11 @@
       "teacher": "Tr, DM",
       "classroom": "105",
       "changed": false,
-      "removed": true
+      "removed": false
     },
     {
-      "key": "48f606d6fe2b5c60",
-      "date": "2026-10-06",
+      "key": "93af9d35e4b99022",
+      "date": "2026-10-13",
       "period": "7",
       "start": "13:50",
       "end": "14:35",
@@ -421,8 +327,8 @@
       "removed": false
     },
     {
-      "key": "e533f5882e065a8a",
-      "date": "2026-10-06",
+      "key": "059462539fc27d02",
+      "date": "2026-10-13",
       "period": "7",
       "start": "13:50",
       "end": "14:35",
@@ -434,11 +340,11 @@
       "teacher": "Sn",
       "classroom": "105",
       "changed": false,
-      "removed": true
+      "removed": false
     },
     {
-      "key": "d60972ce912a3cc3",
-      "date": "2026-10-06",
+      "key": "2fd96b104d746023",
+      "date": "2026-10-13",
       "period": "8",
       "start": "14:40",
       "end": "15:25",
@@ -450,11 +356,11 @@
       "teacher": "Ha",
       "classroom": "002",
       "changed": false,
-      "removed": true
+      "removed": false
     },
     {
-      "key": "56cb79e22e0daf99",
-      "date": "2026-10-06",
+      "key": "68d00e124bbea2d0",
+      "date": "2026-10-13",
       "period": "8",
       "start": "14:40",
       "end": "15:25",
@@ -466,11 +372,11 @@
       "teacher": "Sn",
       "classroom": "105",
       "changed": false,
-      "removed": true
+      "removed": false
     },
     {
-      "key": "0c2351c00c042337",
-      "date": "2026-10-07",
+      "key": "4f38f3a4103ccf39",
+      "date": "2026-10-14",
       "period": "1",
       "start": "08:15",
       "end": "09:00",
@@ -482,11 +388,11 @@
       "teacher": "Ha",
       "classroom": "002",
       "changed": false,
-      "removed": false
+      "removed": true
     },
     {
-      "key": "a594a7aba4823353",
-      "date": "2026-10-07",
+      "key": "558adaae6f88c340",
+      "date": "2026-10-14",
       "period": "1",
       "start": "08:15",
       "end": "09:00",
@@ -498,25 +404,25 @@
       "teacher": "Šr",
       "classroom": "105",
       "changed": false,
-      "removed": false
+      "removed": true
     },
     {
-      "key": "7d687823227ebce8",
-      "date": "2026-10-07",
-      "period": "14-15",
-      "start": "14:15",
-      "end": "15:15",
+      "key": "158ad411c3a36e20",
+      "date": "2026-10-14",
+      "period": "14-00",
+      "start": "14:00",
+      "end": "15:00",
       "duration_periods": 1,
       "subject": "Kroužek",
       "groups": [],
-      "teacher": "Žv",
-      "classroom": "",
+      "teacher": "AHK",
+      "classroom": "207",
       "changed": false,
       "removed": false
     },
     {
-      "key": "fda8158d29279283",
-      "date": "2026-10-07",
+      "key": "36fd3b513571123a",
+      "date": "2026-10-14",
       "period": "14-15",
       "start": "14:15",
       "end": "15:45",
@@ -529,8 +435,22 @@
       "removed": false
     },
     {
-      "key": "875ba3e07a8049cd",
-      "date": "2026-10-07",
+      "key": "61ff59d541055eba",
+      "date": "2026-10-14",
+      "period": "14-15",
+      "start": "14:15",
+      "end": "15:15",
+      "duration_periods": 1,
+      "subject": "Kroužek",
+      "groups": [],
+      "teacher": "Žv",
+      "classroom": "",
+      "changed": false,
+      "removed": false
+    },
+    {
+      "key": "b0f5590b544bd0e4",
+      "date": "2026-10-14",
       "period": "14-20",
       "start": "14:20",
       "end": "15:50",
@@ -543,22 +463,8 @@
       "removed": false
     },
     {
-      "key": "cb374a0c4d08290d",
-      "date": "2026-10-07",
-      "period": "14-30",
-      "start": "14:30",
-      "end": "16:00",
-      "duration_periods": 1,
-      "subject": "Kroužek",
-      "groups": [],
-      "teacher": "-BM-",
-      "classroom": "401",
-      "changed": false,
-      "removed": false
-    },
-    {
-      "key": "5144c40a595f7c9e",
-      "date": "2026-10-07",
+      "key": "ef9a72e378536beb",
+      "date": "2026-10-14",
       "period": "15-15",
       "start": "15:15",
       "end": "16:15",
@@ -571,8 +477,8 @@
       "removed": false
     },
     {
-      "key": "1f30f8e909cbc6ec",
-      "date": "2026-10-07",
+      "key": "d2cbda57cadc2956",
+      "date": "2026-10-14",
       "period": "2",
       "start": "09:10",
       "end": "09:55",
@@ -584,11 +490,11 @@
       "teacher": "Ha",
       "classroom": "002",
       "changed": false,
-      "removed": false
+      "removed": true
     },
     {
-      "key": "8bcde71a0a6ebdd1",
-      "date": "2026-10-07",
+      "key": "2c17d1fa8d2b2493",
+      "date": "2026-10-14",
       "period": "2",
       "start": "09:10",
       "end": "09:55",
@@ -603,8 +509,24 @@
       "removed": false
     },
     {
-      "key": "358dafbb6d2ed627",
-      "date": "2026-10-07",
+      "key": "3d01870b072fd67e",
+      "date": "2026-10-14",
+      "period": "2",
+      "start": "09:10",
+      "end": "09:55",
+      "duration_periods": 1,
+      "subject": "NN",
+      "groups": [
+        "AJ1"
+      ],
+      "teacher": "Šr",
+      "classroom": "106",
+      "changed": true,
+      "removed": false
+    },
+    {
+      "key": "d651b324aa125a3b",
+      "date": "2026-10-14",
       "period": "3",
       "start": "10:15",
       "end": "11:00",
@@ -619,8 +541,8 @@
       "removed": false
     },
     {
-      "key": "78c141fa7a3771b9",
-      "date": "2026-10-07",
+      "key": "7fc4b78c96d24693",
+      "date": "2026-10-14",
       "period": "3",
       "start": "10:15",
       "end": "11:00",
@@ -632,41 +554,11 @@
       "teacher": "Sn",
       "classroom": "105",
       "changed": false,
-      "removed": true
-    },
-    {
-      "key": "9214d604305a0166",
-      "date": "2026-10-07",
-      "period": "3",
-      "start": "10:15",
-      "end": "11:00",
-      "duration_periods": 1,
-      "subject": "NN",
-      "groups": [
-        "AJ2"
-      ],
-      "teacher": "Šr",
-      "classroom": "105",
-      "changed": true,
       "removed": false
     },
     {
-      "key": "8bc03f407d8d39ca",
-      "date": "2026-10-07",
-      "period": "4",
-      "start": "11:10",
-      "end": "11:55",
-      "duration_periods": 1,
-      "subject": "BI",
-      "groups": [],
-      "teacher": "Do",
-      "classroom": "407",
-      "changed": true,
-      "removed": false
-    },
-    {
-      "key": "0df3e339678eadb6",
-      "date": "2026-10-07",
+      "key": "68763f95d5b9f5f1",
+      "date": "2026-10-14",
       "period": "4",
       "start": "11:10",
       "end": "11:55",
@@ -678,11 +570,11 @@
       "teacher": "Sn",
       "classroom": "105",
       "changed": false,
-      "removed": true
+      "removed": false
     },
     {
-      "key": "c18862464392fbf3",
-      "date": "2026-10-07",
+      "key": "ca65c0abe8864db0",
+      "date": "2026-10-14",
       "period": "4",
       "start": "11:10",
       "end": "11:55",
@@ -694,43 +586,57 @@
       "teacher": "Šr",
       "classroom": "101",
       "changed": false,
-      "removed": true
+      "removed": false
     },
     {
-      "key": "1a5014f19a4ff944",
-      "date": "2026-10-07",
+      "key": "ecf023eea707594e",
+      "date": "2026-10-14",
+      "period": "5",
+      "start": "12:05",
+      "end": "13:45",
+      "duration_periods": 2,
+      "subject": "HV",
+      "groups": [],
+      "teacher": "Wt",
+      "classroom": "108",
+      "changed": true,
+      "removed": false
+    },
+    {
+      "key": "f6ec8fcf08fbde4a",
+      "date": "2026-10-14",
       "period": "5",
       "start": "12:05",
       "end": "13:45",
       "duration_periods": 2,
       "subject": "HV",
       "groups": [
-        "AJ2"
+        "AJ1"
       ],
       "teacher": "Wt",
       "classroom": "108",
       "changed": false,
-      "removed": false
+      "removed": true
     },
     {
-      "key": "baef0cf9423a1a94",
-      "date": "2026-10-07",
+      "key": "240f34c695ab6e75",
+      "date": "2026-10-14",
       "period": "5",
       "start": "12:05",
       "end": "13:45",
       "duration_periods": 2,
       "subject": "VV",
       "groups": [
-        "AJ1"
+        "AJ2"
       ],
       "teacher": "An",
       "classroom": "409",
       "changed": false,
-      "removed": false
+      "removed": true
     },
     {
-      "key": "e98eb0888187ce91",
-      "date": "2026-10-08",
+      "key": "6c0eaf2a58b97632",
+      "date": "2026-10-15",
       "period": "1",
       "start": "08:15",
       "end": "09:00",
@@ -743,8 +649,8 @@
       "removed": false
     },
     {
-      "key": "ab9b2dc5fa446393",
-      "date": "2026-10-08",
+      "key": "1b496fec9cebe064",
+      "date": "2026-10-15",
       "period": "15-00",
       "start": "15:00",
       "end": "16:00",
@@ -757,8 +663,8 @@
       "removed": false
     },
     {
-      "key": "0bb0a6a528e3173a",
-      "date": "2026-10-08",
+      "key": "5b35af116701e5e7",
+      "date": "2026-10-15",
       "period": "2",
       "start": "09:10",
       "end": "09:55",
@@ -773,24 +679,24 @@
       "removed": false
     },
     {
-      "key": "f758e8cc28616f17",
-      "date": "2026-10-08",
+      "key": "f4270c457b309da4",
+      "date": "2026-10-15",
       "period": "2",
       "start": "09:10",
       "end": "09:55",
       "duration_periods": 1,
-      "subject": "F",
+      "subject": "NJ",
       "groups": [
         "AJ1"
       ],
-      "teacher": "Gr",
-      "classroom": "401",
-      "changed": true,
+      "teacher": "Sn",
+      "classroom": "105",
+      "changed": false,
       "removed": false
     },
     {
-      "key": "1d266f189830db8d",
-      "date": "2026-10-08",
+      "key": "0472da639881f438",
+      "date": "2026-10-15",
       "period": "3",
       "start": "10:15",
       "end": "11:00",
@@ -805,24 +711,24 @@
       "removed": false
     },
     {
-      "key": "b793077c2f5c2b20",
-      "date": "2026-10-08",
+      "key": "e1b09b82dc367527",
+      "date": "2026-10-15",
       "period": "3",
       "start": "10:15",
       "end": "11:00",
       "duration_periods": 1,
-      "subject": "F",
+      "subject": "NJ",
       "groups": [
         "AJ2"
       ],
-      "teacher": "Gr",
-      "classroom": "401",
-      "changed": true,
+      "teacher": "Sn",
+      "classroom": "105",
+      "changed": false,
       "removed": false
     },
     {
-      "key": "eb25175ef98e7db5",
-      "date": "2026-10-08",
+      "key": "9963af2253ed6eca",
+      "date": "2026-10-15",
       "period": "4",
       "start": "11:10",
       "end": "11:55",
@@ -835,28 +741,12 @@
       "removed": false
     },
     {
-      "key": "29527c153148ba2e",
-      "date": "2026-10-08",
+      "key": "175f1145d08f1c59",
+      "date": "2026-10-15",
       "period": "5",
       "start": "12:05",
-      "end": "12:50",
-      "duration_periods": 1,
-      "subject": "TV",
-      "groups": [
-        "Chl"
-      ],
-      "teacher": "Vo",
-      "classroom": "TV1",
-      "changed": false,
-      "removed": false
-    },
-    {
-      "key": "de4b4440a42eb4af",
-      "date": "2026-10-08",
-      "period": "5",
-      "start": "12:05",
-      "end": "12:50",
-      "duration_periods": 1,
+      "end": "13:45",
+      "duration_periods": 2,
       "subject": "TV",
       "groups": [
         "Dív"
@@ -867,12 +757,12 @@
       "removed": false
     },
     {
-      "key": "1e55dd6918b690d1",
-      "date": "2026-10-08",
-      "period": "6",
-      "start": "13:00",
+      "key": "ccc0af432b19cd46",
+      "date": "2026-10-15",
+      "period": "5",
+      "start": "12:05",
       "end": "13:45",
-      "duration_periods": 1,
+      "duration_periods": 2,
       "subject": "TV",
       "groups": [
         "Chl"
@@ -880,27 +770,39 @@
       "teacher": "Vo",
       "classroom": "TV1",
       "changed": false,
-      "removed": true
+      "removed": false
     },
     {
-      "key": "3e08251bd101a667",
-      "date": "2026-10-08",
-      "period": "6",
-      "start": "13:00",
-      "end": "13:45",
+      "key": "e5ad1abe7cc35c89",
+      "date": "2026-10-15",
+      "period": "8",
+      "start": "14:40",
+      "end": "15:25",
       "duration_periods": 1,
-      "subject": "TV",
-      "groups": [
-        "Dív"
-      ],
-      "teacher": "By",
-      "classroom": "TV2",
+      "subject": "CJL",
+      "groups": [],
+      "teacher": "Hb, DM",
+      "classroom": "105",
       "changed": false,
-      "removed": true
+      "removed": false
     },
     {
-      "key": "54f9808b28c04955",
-      "date": "2026-10-09",
+      "key": "922c0f844a6f3623",
+      "date": "2026-10-15",
+      "period": "9",
+      "start": "15:30",
+      "end": "16:15",
+      "duration_periods": 1,
+      "subject": "TH",
+      "groups": [],
+      "teacher": "Sn, DM",
+      "classroom": "105",
+      "changed": false,
+      "removed": false
+    },
+    {
+      "key": "63448af2df4724ef",
+      "date": "2026-10-16",
       "period": "1",
       "start": "08:15",
       "end": "09:00",
@@ -913,8 +815,8 @@
       "removed": false
     },
     {
-      "key": "d0f51432d0b1f9a2",
-      "date": "2026-10-09",
+      "key": "90b7e6af1d759136",
+      "date": "2026-10-16",
       "period": "14-05",
       "start": "14:05",
       "end": "15:05",
@@ -927,8 +829,8 @@
       "removed": false
     },
     {
-      "key": "72501dc03f0d249e",
-      "date": "2026-10-09",
+      "key": "7aba82691db60ba7",
+      "date": "2026-10-16",
       "period": "14-15",
       "start": "14:15",
       "end": "15:45",
@@ -941,8 +843,8 @@
       "removed": false
     },
     {
-      "key": "d6bc2bcba7529d19",
-      "date": "2026-10-09",
+      "key": "d0e0e35b42ce3afc",
+      "date": "2026-10-16",
       "period": "14-30",
       "start": "14:30",
       "end": "15:30",
@@ -955,8 +857,22 @@
       "removed": false
     },
     {
-      "key": "a7f62cb3f17e6c1c",
-      "date": "2026-10-09",
+      "key": "ec75a1e7606f9371",
+      "date": "2026-10-16",
+      "period": "2",
+      "start": "09:10",
+      "end": "09:55",
+      "duration_periods": 1,
+      "subject": "F",
+      "groups": [],
+      "teacher": "Gr, DM",
+      "classroom": "407",
+      "changed": true,
+      "removed": false
+    },
+    {
+      "key": "88fa3ebfea301bc1",
+      "date": "2026-10-16",
       "period": "2",
       "start": "09:10",
       "end": "09:55",
@@ -966,11 +882,25 @@
       "teacher": "Ša, DM",
       "classroom": "105",
       "changed": false,
+      "removed": true
+    },
+    {
+      "key": "48741a2dee3fb641",
+      "date": "2026-10-16",
+      "period": "3",
+      "start": "10:15",
+      "end": "11:00",
+      "duration_periods": 1,
+      "subject": "BI",
+      "groups": [],
+      "teacher": "Do, DM",
+      "classroom": "411",
+      "changed": true,
       "removed": false
     },
     {
-      "key": "0745193170ab7181",
-      "date": "2026-10-09",
+      "key": "57f25dd7181fefe2",
+      "date": "2026-10-16",
       "period": "3",
       "start": "10:15",
       "end": "11:00",
@@ -980,11 +910,11 @@
       "teacher": "Gr, DM",
       "classroom": "405",
       "changed": false,
-      "removed": false
+      "removed": true
     },
     {
-      "key": "9bb8cd946ea5f5f4",
-      "date": "2026-10-09",
+      "key": "39646110321e25ec",
+      "date": "2026-10-16",
       "period": "4",
       "start": "11:10",
       "end": "11:55",
@@ -997,8 +927,8 @@
       "removed": false
     },
     {
-      "key": "6e6c5f0933e05c6f",
-      "date": "2026-10-09",
+      "key": "3175632eca0543cc",
+      "date": "2026-10-16",
       "period": "5",
       "start": "12:05",
       "end": "12:50",
@@ -1008,11 +938,25 @@
       "teacher": "Do, DM",
       "classroom": "411",
       "changed": false,
+      "removed": true
+    },
+    {
+      "key": "9418e432859cb3e4",
+      "date": "2026-10-16",
+      "period": "5",
+      "start": "12:05",
+      "end": "12:50",
+      "duration_periods": 1,
+      "subject": "CJL",
+      "groups": [],
+      "teacher": "Hb, DM",
+      "classroom": "105",
+      "changed": true,
       "removed": false
     },
     {
-      "key": "12e6a8acbcaf867e",
-      "date": "2026-10-09",
+      "key": "485e4ab6d53ef3f0",
+      "date": "2026-10-16",
       "period": "6",
       "start": "13:00",
       "end": "13:45",
@@ -1022,7 +966,7 @@
       "teacher": "Hb, DM",
       "classroom": "105",
       "changed": false,
-      "removed": false
+      "removed": true
     }
   ]
 }
