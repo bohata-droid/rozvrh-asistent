@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-13T12:27:46.804787+00:00",
+  "updated_at": "2026-10-14T09:55:34.474697+00:00",
   "range_start": "2026-10-12",
   "range_end": "2026-10-16",
   "class": "2.A",
@@ -85,20 +85,6 @@
       ],
       "teacher": "Da",
       "classroom": "105",
-      "changed": false,
-      "removed": false
-    },
-    {
-      "key": "80cb9b2e434a3c43",
-      "date": "2026-10-12",
-      "period": "14-00",
-      "start": "14:00",
-      "end": "15:00",
-      "duration_periods": 1,
-      "subject": "Kroužek",
-      "groups": [],
-      "teacher": "AHK",
-      "classroom": "aula",
       "changed": false,
       "removed": false
     },
