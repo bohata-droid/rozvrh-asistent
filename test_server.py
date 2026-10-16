@@ -155,13 +155,13 @@ class SharedStateTest(unittest.TestCase):
         login = self.request(fresh_client, "/api/login", {"user_id": self.user_id, "pin": "4321"})
         self.assertEqual(login["user"]["role"], "assistant")
 
-    def test_teacher_can_write_message_and_mark_absence(self) -> None:
+    def test_teacher_can_write_shared_note_and_mark_absence(self) -> None:
         teacher = self.opener()
         assistant = self.opener()
         reader = self.opener()
         self.request(teacher, "/api/login", {"user_id": self.teacher_id, "pin": "5678"})
         self.request(assistant, "/api/login", {"user_id": self.user_id, "pin": "1234"})
-        self.request(teacher, "/api/teacher-message", {"text": "Prosím o doprovod."})
+        self.request(teacher, "/api/note", {"text": "Prosím o doprovod."})
         self.request(
             teacher,
             "/api/absence",
@@ -176,8 +176,9 @@ class SharedStateTest(unittest.TestCase):
 
         status = self.request(reader, "/api/status")
         week = self.request(reader, "/api/week?start=2026-09-28")
-        self.assertEqual(status["teacher_message"]["text"], "Prosím o doprovod.")
-        self.assertEqual(status["teacher_message"]["user_name"], "Testovací učitel")
+        self.assertEqual(status["note"]["text"], "Prosím o doprovod.")
+        self.assertEqual(status["note"]["user_name"], "Testovací učitel")
+        self.assertNotIn("teacher_message", status)
         self.assertEqual(week["selections"][0]["lesson_key"], "lesson-a")
         self.assertEqual(week["absences"][0]["lesson_key"], "lesson-a")
 
@@ -245,13 +246,11 @@ class SharedStateTest(unittest.TestCase):
         self.request(teacher, "/api/login", {"user_id": self.teacher_id, "pin": "5678"})
 
         forbidden_requests = [
-            (assistant, "/api/teacher-message", {"text": "Nemá projít"}),
             (
                 assistant,
                 "/api/absence",
                 {"date": "2026-09-28", "period": "1", "lesson_key": "lesson-a", "absent": True},
             ),
-            (teacher, "/api/note", {"text": "Nemá projít"}),
             (
                 teacher,
                 "/api/selection",
@@ -264,13 +263,18 @@ class SharedStateTest(unittest.TestCase):
             self.assertEqual(error.exception.code, 403)
             error.exception.close()
 
-    def test_digest_contains_date_presence_note_and_teacher_message(self) -> None:
+        anonymous = self.opener()
+        with self.assertRaises(urllib.error.HTTPError) as error:
+            self.request(anonymous, "/api/note", {"text": "Nemá projít"})
+        self.assertEqual(error.exception.code, 401)
+        error.exception.close()
+
+    def test_digest_contains_schedule_change_but_not_shared_note(self) -> None:
         teacher = self.opener()
         assistant = self.opener()
         self.request(teacher, "/api/login", {"user_id": self.teacher_id, "pin": "5678"})
         self.request(assistant, "/api/login", {"user_id": self.user_id, "pin": "1234"})
-        self.request(assistant, "/api/note", {"text": "Poznámka asistenta"})
-        self.request(teacher, "/api/teacher-message", {"text": "Zpráva učitele"})
+        self.request(assistant, "/api/note", {"text": "Soukromý obsah poznámky"})
         self.request(
             teacher,
             "/api/absence",
@@ -278,13 +282,12 @@ class SharedStateTest(unittest.TestCase):
         )
         with server.db_connect() as db:
             changes = db.execute("SELECT * FROM change_log ORDER BY id").fetchall()
-            note = db.execute("SELECT * FROM note WHERE id=1").fetchone()
-            message = db.execute("SELECT * FROM teacher_message WHERE id=1").fetchone()
-        digest = "\n".join(server.build_digest_lines(changes, note, message))
+        digest = "\n".join(server.build_digest_lines(changes))
         self.assertIn("28. 9. 2026", digest)
         self.assertIn("NEPŘÍTOMEN", digest)
-        self.assertIn("Poznámka asistenta", digest)
-        self.assertIn("Zpráva učitele", digest)
+        self.assertNotIn("Soukromý obsah poznámky", digest)
+        self.assertNotIn("POZNÁMKA", digest)
+        self.assertEqual([change["event_type"] for change in changes], ["schedule"])
 
     def test_month_export_counts_presence_and_identifies_absence_teacher(self) -> None:
         assistant = self.opener()

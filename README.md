@@ -1,9 +1,10 @@
 # Asistent pedagoga – týdenní rozvrh
 
 Aplikace načte týdenní rozvrh třídy 2.A z veřejného EduPage. Asistent zapisuje
-svou přítomnost a poznámku, učitel může označit nepřítomnost asistenta a napsat
-mu zprávu. Změny ukládá do SQLite a v 16:00 z nich odesílá přihlášeným
-příjemcům přehledný e-mailový souhrn.
+svou přítomnost a učitel může označit jeho nepřítomnost. Všichni přihlášení
+uživatelé mohou upravovat jednu společnou poznámku, která se zobrazuje všem a
+neposílá se e-mailem. Změny v docházce aplikace ukládá do SQLite a v 16:00 z nich
+odesílá přihlášeným příjemcům přehledný e-mailový souhrn.
 
 Postup pro ostré nasazení na školní Linux server pod doménou
 `asistent.arcig.cz` je v souboru [DEPLOYMENT_LINUX.md](DEPLOYMENT_LINUX.md).

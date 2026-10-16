@@ -552,7 +552,7 @@ def smtp_ready() -> bool:
     return bool(os.environ.get("SMTP_HOST") and os.environ.get("SMTP_FROM"))
 
 
-def build_digest_lines(changes: list[sqlite3.Row], note: sqlite3.Row, teacher_message: sqlite3.Row) -> list[str]:
+def build_digest_lines(changes: list[sqlite3.Row]) -> list[str]:
     lines = ["Souhrn změn v docházce asistenta pedagoga", ""]
     schedule_changes: dict[tuple[str, str, str], sqlite3.Row] = {}
     legacy_changes = []
@@ -576,15 +576,6 @@ def build_digest_lines(changes: list[sqlite3.Row], note: sqlite3.Row, teacher_me
             )
         lines.append("")
 
-    lines.append("POZNÁMKA ASISTENTA")
-    lines.append(note["text"] or "Bez aktuální poznámky.")
-    if note["text"] and note["updated_by"]:
-        lines.append(f"Naposledy upravil/a: {note['updated_by']}")
-    lines.extend(["", "ZPRÁVA UČITELE PRO ASISTENTA"])
-    lines.append(teacher_message["text"] or "Bez aktuální zprávy.")
-    if teacher_message["text"] and teacher_message["updated_by"]:
-        lines.append(f"Naposledy upravil/a: {teacher_message['updated_by']}")
-
     if legacy_changes:
         lines.extend(["", "STARŠÍ ZMĚNY"])
         lines.extend(f"• {change['description']}" for change in legacy_changes)
@@ -598,7 +589,9 @@ def send_digest() -> bool:
         return False
     with db_connect() as db:
         changes = db.execute(
-            "SELECT * FROM change_log WHERE notified_at IS NULL ORDER BY id"
+            """SELECT * FROM change_log
+               WHERE notified_at IS NULL AND event_type IN ('schedule', 'legacy')
+               ORDER BY id"""
         ).fetchall()
         recipients = list(dict.fromkeys(
             row["email"]
@@ -606,8 +599,6 @@ def send_digest() -> bool:
                 "SELECT email FROM users WHERE active=1 AND system=0 AND notify=1 AND email <> '' ORDER BY name"
             )
         ))
-        note = db.execute("SELECT * FROM note WHERE id=1").fetchone()
-        teacher_message = db.execute("SELECT * FROM teacher_message WHERE id=1").fetchone()
     if not changes or not recipients:
         return False
 
@@ -615,7 +606,7 @@ def send_digest() -> bool:
     message["Subject"] = f"Asistent pedagoga – souhrn změn {date_cz(now_local().date())}"
     message["From"] = os.environ["SMTP_FROM"]
     message["To"] = os.environ["SMTP_FROM"]
-    lines = build_digest_lines(changes, note, teacher_message)
+    lines = build_digest_lines(changes)
     message.set_content("\n".join(lines))
 
     host = os.environ["SMTP_HOST"]
@@ -715,6 +706,12 @@ class AppHandler(BaseHTTPRequestHandler):
             return None
         return user
 
+    def require_user(self) -> sqlite3.Row | None:
+        user = self.session_user()
+        if user is None:
+            self.error_json("Nejprve se přihlaste.", HTTPStatus.UNAUTHORIZED)
+        return user
+
     def require_admin(self) -> bool:
         supplied = self.headers.get("X-Admin-Password", "")
         if not hmac.compare_digest(supplied, ADMIN_PASSWORD):
@@ -757,8 +754,6 @@ class AppHandler(BaseHTTPRequestHandler):
                 return self.post_whole_class()
             if path == "/api/note":
                 return self.post_note()
-            if path == "/api/teacher-message":
-                return self.post_teacher_message()
             if path == "/api/absence":
                 return self.post_absence()
             if path == "/api/admin/users":
@@ -832,18 +827,11 @@ class AppHandler(BaseHTTPRequestHandler):
                 """SELECT note.text, note.updated_at, COALESCE(NULLIF(note.updated_by, ''), users.name) AS user_name
                    FROM note LEFT JOIN users ON users.id=note.user_id WHERE note.id=1"""
             ).fetchone()
-            teacher_message = db.execute(
-                """SELECT teacher_message.text, teacher_message.updated_at,
-                          COALESCE(NULLIF(teacher_message.updated_by, ''), users.name) AS user_name
-                   FROM teacher_message LEFT JOIN users ON users.id=teacher_message.user_id
-                   WHERE teacher_message.id=1"""
-            ).fetchone()
         self.send_json(
             {
                 "current_user": public_user(user),
                 "login_users": [dict(row) for row in users],
                 "note": dict(note) if note else {"text": ""},
-                "teacher_message": dict(teacher_message) if teacher_message else {"text": ""},
                 "smtp_ready": smtp_ready(),
                 "admin_uses_default_password": ADMIN_PASSWORD == "zmenit-me",
             }
@@ -1034,7 +1022,7 @@ class AppHandler(BaseHTTPRequestHandler):
         self.send_json({"ok": True})
 
     def post_note(self) -> None:
-        user = self.require_role("assistant")
+        user = self.require_user()
         if user is None:
             return
         text = str(self.read_json().get("text", "")).strip()
@@ -1048,39 +1036,6 @@ class AppHandler(BaseHTTPRequestHandler):
             db.execute(
                 "UPDATE note SET text=?, user_id=?, updated_by=?, updated_at=? WHERE id=1",
                 (text, user["id"], user["name"], stamp),
-            )
-            action = "upravil poznámku" if text else "smazal poznámku"
-            db.execute(
-                """INSERT INTO change_log
-                   (created_at, user_id, description, event_type, message_kind, message_text)
-                   VALUES (?, ?, ?, 'message', 'assistant_note', ?)""",
-                (stamp, user["id"], f"{user['name']} {action}: {text or '—'}", text),
-            )
-        self.send_json({"ok": True})
-
-    def post_teacher_message(self) -> None:
-        user = self.require_role("teacher")
-        if user is None:
-            return
-        text = str(self.read_json().get("text", "")).strip()
-        if len(text) > 2000:
-            raise ValueError("Zpráva může mít nejvýše 2000 znaků.")
-        stamp = now_local().isoformat()
-        with db_connect() as db:
-            old = db.execute("SELECT text FROM teacher_message WHERE id=1").fetchone()["text"]
-            if old == text:
-                return self.send_json({"ok": True})
-            db.execute(
-                """UPDATE teacher_message
-                   SET text=?, user_id=?, updated_by=?, updated_at=? WHERE id=1""",
-                (text, user["id"], user["name"], stamp),
-            )
-            action = "upravil/a zprávu" if text else "smazal/a zprávu"
-            db.execute(
-                """INSERT INTO change_log
-                   (created_at, user_id, description, event_type, message_kind, message_text)
-                   VALUES (?, ?, ?, 'message', 'teacher_message', ?)""",
-                (stamp, user["id"], f"{user['name']} {action} pro asistenta: {text or '—'}", text),
             )
         self.send_json({"ok": True})
 
