@@ -12,18 +12,36 @@ permissions:
 jobs:
   update-timetable:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Checkout repozitare
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Nastaveni Pythonu
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.11"
 
       - name: Stazeni rozvrhu
-        run: python fetch_timetable.py
+        shell: bash
+        run: |
+          # Verejne EduPage API obcas docasne odmita nebo prerusi pozadavek.
+          # Zkusime ho proto opakovane; pri delsim vypadku ponechame posledni
+          # platny export a dalsi naplanovany beh to zkusi znovu.
+          for attempt in 1 2 3 4 5; do
+            if python fetch_timetable.py; then
+              exit 0
+            fi
+
+            if [ "$attempt" -lt 5 ]; then
+              delay=$((attempt * 30))
+              echo "Stazeni selhalo (pokus $attempt/5), dalsi pokus za ${delay} s."
+              sleep "$delay"
+            fi
+          done
+
+          echo "::warning::EduPage je docasne nedostupny. Ponechavam posledni platny rozvrh."
 
       - name: Ulozeni timetable.json
         shell: bash
