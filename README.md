@@ -61,15 +61,17 @@ stejného místa poslat i ručně.
 
 ## Aktualizace statického exportu
 
-Příkaz níže stáhne týden obsahující zadaný den do `timetable.json` a
-`timetable-data.js`; používá ho také stávající GitHub Actions workflow.
+Příkaz níže ručně stáhne týden obsahující zadaný den do `timetable.json` a
+`timetable-data.js`. Na GitHubu se žádná automatická aktualizace nespouští.
 
 ```powershell
 python fetch_timetable.py --date 2026-09-17
 ```
 
-Server si jednotlivé navštívené týdny ukládá na hodinu do mezipaměti. Tlačítko
-„Aktualizovat“ v aplikaci vynutí nové načtení z EduPage.
+Provozní server načítá rozvrh přímo z EduPage a jednotlivé navštívené týdny si
+ukládá na hodinu do mezipaměti v databázi. Tlačítko „Aktualizovat“ v aplikaci
+vynutí nové načtení z EduPage. Aktualizace zdrojového kódu pomocí `git pull` a
+restartu služby na tento mechanismus nemá vliv.
 
 ## Nasazení na Render
 
